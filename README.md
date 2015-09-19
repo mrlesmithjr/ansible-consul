@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Installs, configures and build a Consul cluster. https://www.consul.io/
+Installs, configures and builds a Consul cluster. https://www.consul.io/
 
 Requirements
 ------------
