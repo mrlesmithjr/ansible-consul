@@ -1,0 +1,9 @@
+---
+# tasks file for ansible-consul
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: config_consul.yml
+
+- incude: config_app_services.yml
+  when: consul_services is defined

@@ -1,0 +1,7 @@
+---
+- name: installing dependencies
+  apt: name={{ item }} state=present
+  with_items:
+    - jq
+    - tree
+    - unzip

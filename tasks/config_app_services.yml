@@ -1,0 +1,16 @@
+---
+- name: configuring consul app services
+  template: src=templates/etc/consul.d/client/service.json.j2 dest={{ consul_config_dir }}/client/{{ item.name }}.json owner=root group=root mode=0644
+  notify: restart consul
+  with_items: consul_services
+  when: (consul_client is defined and consul_client) and consul_services is defined
+
+- name: checking if mysql is installed
+  shell: dpkg -l mysql-server
+  register: mysql_installed
+  changed_when: no
+  when: consul_client is defined and consul_client
+
+- name: configuring consul mysql user for checks
+  mysql_user: name={{ consul_mysql_user }} password={{ consul_mysql_password }} priv=*.*:ALL state=present
+  when: (consul_client is defined and consul_client) and mysql_installed.rc == 0

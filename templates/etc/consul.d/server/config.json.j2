@@ -1,0 +1,15 @@
+{
+{% if consul_bind_interface is defined and consul_bind_interface == "eth1" %}
+    "bind_addr": "{{ ansible_eth1.ipv4.address }}",
+{% endif %}
+    "bootstrap_expect": 3,
+    "server": true,
+    "client_addr": "0.0.0.0",
+    "node_name": "{{ ansible_hostname }}",
+    "datacenter": "{{ consul_datacenter }}",
+    "data_dir": "{{ consul_data_dir }}",
+    "encrypt": "{{ consul_encryption_key }}",
+    "log_level": "INFO",
+    "enable_syslog": true,
+    "retry_join": [ "{% for server in groups['consul-servers'] %}{{ hostvars[server].ansible_ssh_host }}"{% if not loop.last %}, "{% endif %}{% endfor %} ]
+}
