@@ -5,5 +5,9 @@
 
 - include: config_consul.yml
 
-- incude: config_app_services.yml
-  when: consul_services is defined
+- include: config_app_services.yml
+  tags:
+    - consul-app-services
+  when: >
+        consul_services is defined and
+        inventory_hostname in groups[consul_clients_group]

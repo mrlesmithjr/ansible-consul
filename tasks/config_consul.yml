@@ -1,57 +1,159 @@
 ---
-- name: downloading consul
-  get_url: url={{ consul_dl_url }}/{{ consul_dl_file }} dest=/opt
+- name: config_consul | downloading consul
+  get_url:
+    url: "{{ consul_dl_url }}/{{ consul_dl_file }}"
+    dest: "/opt"
 
-- name: extracting consul binary
-  unarchive: src=/opt/{{ consul_dl_file }} dest={{ consul_bin_path }} copy=no creates={{ consul_bin_path }}/consul
+- name: config_consul | extracting consul binary
+  unarchive:
+    src: "/opt/{{ consul_dl_file }}"
+    dest: "{{ consul_bin_path }}"
+    copy: no
+    creates: "{{ consul_bin_path }}/consul"
 
-- name: creating consul group
-  group: name={{ consul_group }} state=present
+- name: config_consul | creating consul group
+  group:
+    name: "{{ consul_group }}"
+    state: present
 
-- name: creating consul user
-  user: name={{ consul_user }} group={{ consul_group }} system=yes
+- name: config_consul | creating consul user
+  user:
+    name: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    system: yes
 
-- name: creating consul configuration folders
-  file: path={{ item }} owner=root group=root state=directory
+- name: config_consul | creating consul configuration folders
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    state: directory
   with_items:
     - '{{ consul_config_dir }}'
-    - '{{ consul_config_dir }}/bootstrap'
+#    - '{{ consul_config_dir }}/bootstrap'
     - '{{ consul_config_dir }}/client'
     - '{{ consul_config_dir }}/scripts'
-    - '{{ consul_config_dir }}/server'
+#    - '{{ consul_config_dir }}/server'
 
-- name: creating consul data folder
-  file: path={{ consul_data_dir }} owner={{ consul_user }} group={{ consul_group }} state=directory
+- name: config_consul | creating consul data folder
+  file:
+    path: "{{ consul_data_dir }}"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    state: directory
 
-- name: configuring consul master
-  template: src=templates/etc/consul.d/bootstrap/config.json.j2 dest={{ consul_config_dir }}/bootstrap/config.json owner=root group=root mode=0644
-  when: consul_master is defined and consul_master
+#- name: config_consul | generating consul encryption key
+#  command: "consul keygen"
+#  args:
+#    creates: "{{ consul_key_file }}"
+#  register: consul_encryption_key
 
-- name: configuring consul servers
-  template: src=templates/etc/consul.d/server/config.json.j2 dest={{ consul_config_dir }}/server/config.json owner=root group=root mode=0644
-  when: consul_server is defined and consul_server
+#- name: config_consul | storing consul_encryption_key
+#  template:
+#    src: "etc/consul.key.j2"
+#    dest: "{{ consul_key_file }}"
+#    owner: root
+#    group: root
+#    mode: 0640
+#  when: consul_encryption_key.changed
 
-- name: configuriing consul clients
-  template: src=templates/etc/consul.d/client/config.json.j2 dest={{ consul_config_dir }}/client/config.json owner=root group=root mode=0644
-  when: consul_client is defined and consul_client
+#- name: config_consul | configuring consul master
+#  template:
+#    src: "templates/etc/consul.d/bootstrap/config.json.j2"
+#    dest: "{{ consul_config_dir }}/bootstrap/config.json"
+#    owner: root
+#    group: root
+#    mode: 0644
+#  when: >
+#        (inventory_hostname == consul_master)
 
-- name: creating consul client folders
-  file: path={{ consul_home }} state=directory
-  when: consul_client is defined and consul_client
+#- name: config_consul | configuring consul servers
+#  template:
+#    src: "templates/etc/consul.d/server/config.json.j2"
+#    dest: "{{ consul_config_dir }}/server/config.json"
+#    owner: root
+#    group: root
+#    mode: 0644
+#  when: >
+#        inventory_hostname in groups[consul_servers_group]
 
-- name: downloading consul ui
-  get_url: url={{ consul_dl_url }}/{{ consul_ui_dl_file }} dest=/opt
-  when: consul_client is defined and consul_client
+#- name: config_consul | configuriing consul clients
+#  template:
+#    src: "templates/etc/consul.d/client/config.json.j2"
+#    dest: "{{ consul_config_dir }}/client/config.json"
+#    owner: root
+#    group: root
+#    mode: 0644
+#  when: >
+#        inventory_hostname in groups[consul_clients_group]
 
-- name: extracting consul ui
-  unarchive: src=/opt/{{ consul_ui_dl_file }} dest={{ consul_home }} copy=no creates={{ consul_home }}/dist/index.html
-  when: consul_client is defined and consul_client
+- name: config_consul | configuring consul
+  template:
+    src: "etc/consul.d/config.json.j2"
+    dest: "{{ consul_config_dir }}/config.json"
+    owner: root
+    group: root
+    mode: 0644
+  register: consul_reconfigured
+  notify:
+    - restart consul
+  when: >
+        inventory_hostname in groups[consul_clients_group] or
+        inventory_hostname in groups[consul_servers_group]
 
-- name: setting permissions on consul home folder
-  file: path={{ consul_home }} owner={{ consul_user }} group={{ consul_group }} recurse=yes state=directory
-  when: consul_client is defined and consul_client
+- name: config_consul | creating consul client folders
+  file:
+    path: "{{ consul_home }}"
+    state: directory
+  when: >
+        inventory_hostname in groups[consul_clients_group]
 
-- name: configuring consul init service
-  template: src=templates/etc/init/consul.conf.j2 dest=/etc/init/consul.conf owner=root group=root mode=0644
+- name: config_consul | downloading consul ui
+  get_url:
+    url: "{{ consul_dl_url }}/{{ consul_ui_dl_file }}"
+    dest: "/opt"
+  when: >
+        inventory_hostname in groups[consul_clients_group]
+
+- name: config_consul | extracting consul ui
+  unarchive:
+    src: "/opt/{{ consul_ui_dl_file }}"
+    dest: "{{ consul_home }}"
+    copy: no
+    creates: "{{ consul_home }}/index.html"
+  when: >
+        inventory_hostname in groups[consul_clients_group]
+
+- name: config_consul | setting permissions on consul home folder
+  file:
+    path: "{{ consul_home }}"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    recurse: yes
+    state: directory
+  when: >
+        inventory_hostname in groups[consul_clients_group]
+
+- name: config_consul | configuring consul init service
+  template:
+    src: "etc/init/consul.conf.j2"
+    dest: "/etc/init/consul.conf"
+    owner: root
+    group: root
+    mode: 0644
   notify: restart consul
-  when: (consul_server is defined and consul_server) or (consul_client is defined and consul_client)
+  when: >
+        inventory_hostname in groups[consul_clients_group] or
+        inventory_hostname in groups[consul_servers_group]
+
+- name: config_consul | restarting consul if re-configured  #this ensures that configurations are in place prior to configuring app_services
+  service:
+    name: "consul"
+    state: restarted
+  when: consul_reconfigured.changed
+
+- name: config_consul | checking to ensure consul agent is listening
+  wait_for:
+    port: 8500
+    delay: 10
+  when: consul_reconfigured.changed
