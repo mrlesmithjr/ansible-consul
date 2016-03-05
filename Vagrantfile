@@ -11,7 +11,7 @@ N = 5
 
 # ---- Define variables below ----
 additional_nics = "yes"  #Define if additional network adapters should be created (yes | no)
-box = "mrlesmithjr/fedora-23"
+box = "mrlesmithjr/trusty64"
 desktop = "no"  #Define if running desktop OS (yes | no)
 linked_clones = "no"  #Defines if nodes should be linked from master VM (yes | no)
 provision_nodes = "yes"  #Define if provisioners should run (yes | no)
