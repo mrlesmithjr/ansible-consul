@@ -11,12 +11,12 @@ N = 5
 
 # ---- Define variables below ----
 additional_nics = "yes"  #Define if additional network adapters should be created (yes | no)
-box = "mrlesmithjr/trusty64"
+box = "mrlesmithjr/fedora-23"
 desktop = "no"  #Define if running desktop OS (yes | no)
 linked_clones = "no"  #Defines if nodes should be linked from master VM (yes | no)
 provision_nodes = "yes"  #Define if provisioners should run (yes | no)
 server_cpus = "1"  #Define number of CPU cores
-server_memory = "512"  #Define amount of memory to assign to node(s)
+server_memory = "1024"  #Define amount of memory to assign to node(s)
 subnet = "192.168.202."  #Define subnet for private_network
 subnet_ip_start = 200  #Define starting last octet of the subnet range to begin addresses for node(s)
 
@@ -56,7 +56,6 @@ Vagrant.configure(2) do |config|
 
       if provision_nodes == "yes"
         if node_id == N
-          node.vm.provision :shell, path: "bootstrap.sh", keep_color: "true"  #runs initial shell script
           node.vm.provision "ansible" do |ansible|  #runs bootstrap Ansible playbook
             ansible.limit = "all"
             ansible.playbook = "bootstrap.yml"
@@ -81,4 +80,5 @@ Vagrant.configure(2) do |config|
 
     end
   end
+  config.vm.provision :shell, path: "bootstrap.sh", keep_color: "true"  #runs initial shell script
 end

@@ -5,6 +5,12 @@
     state: present
   when: ansible_os_family == "Debian"
 
+- name: dnsmasq | installing dnsmasq (RedHat)
+  dnf:
+    name: "dnsmasq"
+    state: present
+  when: ansible_os_family == "RedHat"
+  
 - name: dnsmasq | ensuring dnsmasq service is enabled
   service:
     name: "dnsmasq"
