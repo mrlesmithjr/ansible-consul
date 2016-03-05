@@ -71,6 +71,7 @@ consul_data_dir: '/var/consul'
 consul_datacenter: 'dc1'  #defines datacenter name for Consul
 consul_dl_file: 'consul_{{ consul_version }}_linux_amd64.zip'
 consul_dl_url: 'https://releases.hashicorp.com/consul/{{ consul_version }}'
+consul_enable_dnsmasq: true  #defines if dnsmasq should be installed and configured to resolv consul dns queries to port 8600
 consul_encryption_key: 'qLLp1YCJzp9E/xhg11qkdQ=='  #generate using 'consul keygen'..make sure to generate a new key and replace this...
 consul_group: 'consul'
 consul_home: '/opt/consul'
