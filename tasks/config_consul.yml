@@ -134,7 +134,7 @@
   when: >
         inventory_hostname in groups[consul_clients_group]
 
-- name: config_consul | configuring consul init service
+- name: config_consul | configuring consul init service (Ubuntu)
   template:
     src: "etc/init/consul.conf.j2"
     dest: "/etc/init/consul.conf"
@@ -143,8 +143,27 @@
     mode: 0644
   notify: restart consul
   when: >
-        inventory_hostname in groups[consul_clients_group] or
-        inventory_hostname in groups[consul_servers_group]
+        ansible_distribution == "Ubuntu" and
+        (inventory_hostname in groups[consul_clients_group] or
+        inventory_hostname in groups[consul_servers_group])
+
+- name: config_consul | configuring consul init service (Debian)
+  template:
+    src: "etc/systemd/system/consul.service.j2"
+    dest: "/etc/systemd/system/consul.service"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart consul
+  when: >
+        ansible_distribution == "Debian" and
+        (inventory_hostname in groups[consul_clients_group] or
+        inventory_hostname in groups[consul_servers_group])
+
+- name: config_consul | ensuring consul service is enabled
+  service:
+    name: "consul"
+    enabled: yes
 
 - name: config_consul | restarting consul if re-configured  #this ensures that configurations are in place prior to configuring app_services
   service:
