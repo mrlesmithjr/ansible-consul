@@ -41,27 +41,27 @@
     - install_redis: true
     - pri_domain_name: 'test.vagrant.local'
   roles:
-#    - role: ansible-apf-firewall
-#    - role: ansible-bootstrap
-#    - role: ansible-base
-    - role: ansible-bashrc
-#    - role: ansible-etc-hosts
-#    - role: ansible-hashicorp-toolbox
+    # - role: ansible-apf-firewall
+    # - role: ansible-bootstrap
+    # - role: ansible-base
+    # - role: ansible-bashrc
+    # - role: ansible-etc-hosts
+    # - role: ansible-hashicorp-toolbox
     - role: ansible-nginx
       when: >
             inventory_hostname in groups[consul_clients_group] and
             (install_nginx is defined and
             install_nginx)
     - role: ansible-ntp
-#    - role: ansible-rabbitmq
+    # - role: ansible-rabbitmq
     - role: ansible-redis
       when: >
             inventory_hostname in groups[consul_clients_group] and
             (install_redis is defined and
             install_redis)
-    - role: ansible-rsyslog
-    - role: ansible-timezone
-    - role: ansible-users
+    # - role: ansible-rsyslog
+    # - role: ansible-timezone
+    # - role: ansible-users
     - role: ansible-consul
   tasks:
     - name: uninstalling nginx (if not install_nginx)
