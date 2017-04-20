@@ -4,7 +4,7 @@ consul_bin_path: '/usr/local/bin'
 consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
 consul_bind_interface: 'enp0s8' # Define interface to bind to...(eth0|eth1|enp0s8)
 consul_client_address: '0.0.0.0'  #defines client address to listen on...either set to 0.0.0.0 (default) or consul_bind_address var.
-consul_clients_group: 'consul-clients'  #defines Ansible group that nodes belong to which are clients (agents or services running on)
+consul_clients_group: 'consul_clients'  #defines Ansible group that nodes belong to which are clients (agents or services running on)
 consul_config_dir: '/etc/consul.d'
 consul_config_file: '/etc/consul.conf'
 consul_data_dir: '/var/consul'
@@ -20,7 +20,7 @@ consul_log_file: '/var/log/consul'
 consul_master: 'node0'  #defines which node is the consul master
 consul_mysql_password: 'consul'
 consul_mysql_user: 'consul'
-consul_servers_group: 'consul-servers'  #defines the Ansible group which contains the consul server(s)
+consul_servers_group: 'consul_servers'  #defines the Ansible group which contains the consul server(s)
 consul_services:  #define services to register and checks to ensure those services are running on clients
   - service_name: elasticsearch
     service_port: 9200
