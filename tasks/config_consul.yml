@@ -10,6 +10,7 @@
     dest: "{{ consul_bin_path }}"
     copy: no
     creates: "{{ consul_bin_path }}/consul"
+  when: not ansible_check_mode
 
 - name: config_consul | creating consul group
   group:
@@ -122,7 +123,8 @@
     copy: no
     creates: "{{ consul_home }}/index.html"
   when: >
-        inventory_hostname in groups[consul_clients_group]
+        inventory_hostname in groups[consul_clients_group] and
+        not ansible_check_mode
 
 - name: config_consul | setting permissions on consul home folder
   file:
@@ -168,15 +170,20 @@
   service:
     name: "consul"
     enabled: yes
+  when: not ansible_check_mode
 
 - name: config_consul | restarting consul if re-configured  #this ensures that configurations are in place prior to configuring app_services
   service:
     name: "consul"
     state: restarted
-  when: consul_reconfigured.changed
+  when: >
+        consul_reconfigured['changed'] and
+        not ansible_check_mode
 
 - name: config_consul | checking to ensure consul agent is listening
   wait_for:
     port: 8500
     delay: 10
-  when: consul_reconfigured.changed
+  when: >
+        consul_reconfigured['changed'] and
+        not ansible_check_mode

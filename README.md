@@ -3,6 +3,11 @@ Role Name
 
 Installs, configures and builds a Consul cluster. https://www.consul.io/
 
+Build Status
+------------
+
+[![Build Status](https://travis-ci.org/mrlesmithjr/ansible-consul.svg?branch=master)](https://travis-ci.org/mrlesmithjr/ansible-consul)
+
 Requirements
 ------------
 
