@@ -10,6 +10,7 @@
     dest: "{{ consul_bin_path }}"
     copy: no
     creates: "{{ consul_bin_path }}/consul"
+  when: not ansible_check_mode
 
 - name: config_consul | creating consul group
   group:
