@@ -36,8 +36,10 @@
     mode: 0644
   notify:
     - restart consul
-  with_items: consul_services
-  when: item.state == "present"
+  with_items: '{{ consul_services }}'
+  when: >
+        item['state'] == "present" and
+        not ansible_check_mode
 
 - name: config_app_services | disabling consul app services
   file:
@@ -45,8 +47,10 @@
     state: absent
   notify:
     - restart consul
-  with_items: consul_services
-  when: item.state == "absent"
+  with_items: '{{ consul_services }}'
+  when: >
+        item['state'] == "absent" and
+        not ansible_check_mode
 
 #- name: checking if mysql is installed
 #  shell: dpkg -l mysql-server
