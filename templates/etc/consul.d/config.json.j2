@@ -29,7 +29,7 @@
 {%       set _temp_retry_join = _temp_retry_join.append(_temp_ip) %}
 {%       endif %}
 {%     endfor %}
-    "retry_join": {{ _temp_retry_join|to_nice_json }}
+    "retry_join": {{ _temp_retry_join|to_nice_json }},
     "server": true
 }
 {% endif %}
@@ -50,7 +50,7 @@
 {%       set _temp_retry_join = _temp_retry_join.append(_temp_ip) %}
 {%       endif %}
 {%     endfor %}
-    "retry_join": {{ _temp_retry_join|to_nice_json }}
+    "retry_join": {{ _temp_retry_join|to_nice_json }},
     "server": false,
     "ui_dir": "{{ consul_home }}"
 }
