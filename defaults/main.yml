@@ -79,7 +79,7 @@ consul_services:
     tags:
       - redis
 #      - testing
-    check_script: 'redis-cli ping'
+    check_script: '/var/lib/redis/bin/redis-cli ping'
     interval: 10s
     state: present
 consul_ui_dl_file: 'consul_{{ consul_version }}_web_ui.zip'
