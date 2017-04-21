@@ -28,9 +28,8 @@ This should bring up an environment with a 3-node Consul cluster and 2 nodes
 running redis and nginx for service discovery and testing.  
 
 You can view the consul web-ui by using your browser to open  
-http://192.168.202.203:8500  
-or  
-http://192.168.202.204:8500  
+- [node3]
+- [node4]
 
 When you are done testing in a Vagrant environment you can tear it down by doing
 the following:
@@ -45,7 +44,7 @@ Role Variables
 ---
 # defaults file for ansible-consul
 consul_bin_path: '/usr/local/bin'
-consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
+# consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
 
 # Define interface to bind to...(eth0|eth1|enp0s8)
 consul_bind_interface: "{{ ansible_default_ipv4['interface'] }}"
@@ -196,5 +195,7 @@ Larry Smith Jr.
 - http://everythingshouldbevirtual.com
 - mrlesmithjr [at] gmail.com
 
+[node3]: <http://192.168.250.13:8500>
+[node4]: <http://192.168.250.14:8500>
 [Ansible]: <https://www.ansible.com>
 [Consul]: <https://www.consul.io/>
