@@ -26,9 +26,9 @@
 - name: config_consul | creating consul configuration folders
   file:
     path: "{{ item }}"
-    owner: root
-    group: root
-    state: directory
+    owner: "root"
+    group: "root"
+    state: "directory"
   with_items:
     - '{{ consul_config_dir }}'
 #    - '{{ consul_config_dir }}/bootstrap'
@@ -41,7 +41,7 @@
     path: "{{ consul_data_dir }}"
     owner: "{{ consul_user }}"
     group: "{{ consul_group }}"
-    state: directory
+    state: "directory"
 
 #- name: config_consul | generating consul encryption key
 #  command: "consul keygen"
@@ -92,12 +92,12 @@
   template:
     src: "etc/consul.d/config.json.j2"
     dest: "{{ consul_config_dir }}/config.json"
-    owner: root
-    group: root
-    mode: 0644
-  register: consul_reconfigured
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+  register: "consul_reconfigured"
   notify:
-    - restart consul
+    - "restart consul"
   when: >
         inventory_hostname in groups[consul_clients_group] or
         inventory_hostname in groups[consul_servers_group]
@@ -105,7 +105,7 @@
 - name: config_consul | creating consul client folders
   file:
     path: "{{ consul_home }}"
-    state: directory
+    state: "directory"
   when: >
         inventory_hostname in groups[consul_clients_group]
 
@@ -132,7 +132,7 @@
     owner: "{{ consul_user }}"
     group: "{{ consul_group }}"
     recurse: yes
-    state: directory
+    state: "directory"
   when: >
         inventory_hostname in groups[consul_clients_group]
 
@@ -140,10 +140,10 @@
   template:
     src: "etc/init/consul.conf.j2"
     dest: "/etc/init/consul.conf"
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart consul
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+  notify: "restart consul"
   when: >
         (ansible_distribution == "Ubuntu" and
         ansible_distribution_version <= '14.04') and
@@ -172,10 +172,11 @@
     enabled: yes
   when: not ansible_check_mode
 
-- name: config_consul | restarting consul if re-configured  #this ensures that configurations are in place prior to configuring app_services
+# This ensures that configurations are in place prior to configuring app_services
+- name: config_consul | restarting consul if re-configured
   service:
     name: "consul"
-    state: restarted
+    state: "restarted"
   when: >
         consul_reconfigured['changed'] and
         not ansible_check_mode
