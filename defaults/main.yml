@@ -1,7 +1,7 @@
 ---
 # defaults file for ansible-consul
 consul_bin_path: '/usr/local/bin'
-consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
+# consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
 
 # Define interface to bind to...(eth0|eth1|enp0s8)
 consul_bind_interface: "{{ ansible_default_ipv4['interface'] }}"

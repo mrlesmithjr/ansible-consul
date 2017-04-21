@@ -18,10 +18,7 @@ and consul_servers_group to match.
 Vagrant
 -------
 You can spin up a 5-node Consul environment for testing by doing the following:  
-Install required Ansible roles
-```
-sudo ansible-galaxy install -r requirements.yml -f
-```
+
 Spin up environment  
 ```
 vagrant up
