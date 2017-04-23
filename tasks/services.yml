@@ -1,0 +1,57 @@
+---
+- name: services | configuring consul init service (Ubuntu)
+  template:
+    src: "etc/init/consul.conf.j2"
+    dest: "/etc/init/consul.conf"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o=r"
+  become: true
+  notify: "restart consul"
+  when: >
+        (ansible_distribution == "Ubuntu" and
+        ansible_distribution_version <= '14.04') and
+        (inventory_hostname in groups[consul_clients_group] or
+        inventory_hostname in groups[consul_servers_group])
+
+- name: services | configuring consul systemd service
+  template:
+    src: "etc/systemd/system/consul.service.j2"
+    dest: "/etc/systemd/system/consul.service"
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  notify: restart consul
+  when: >
+        (ansible_distribution == "Debian" or
+        (ansible_distribution == "Ubuntu" and
+        ansible_distribution_version >= '16.04') or
+        ansible_os_family == "RedHat") and
+        (inventory_hostname in groups[consul_clients_group] or
+        inventory_hostname in groups[consul_servers_group])
+
+- name: services | ensuring consul service is enabled
+  service:
+    name: "consul"
+    enabled: yes
+  become: true
+  when: not ansible_check_mode
+
+# This ensures that configurations are in place prior to configuring app_services
+- name: services | restarting consul if re-configured
+  service:
+    name: "consul"
+    state: "restarted"
+  become: true
+  when: >
+        consul_reconfigured['changed'] and
+        not ansible_check_mode
+
+- name: services | checking to ensure consul agent is listening
+  wait_for:
+    port: 8500
+    delay: 10
+  when: >
+        consul_reconfigured['changed'] and
+        not ansible_check_mode

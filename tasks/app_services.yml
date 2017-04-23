@@ -1,5 +1,5 @@
 ---
-- name: config_app_services | installing pre-reqs
+- name: app_services | installing pre-reqs
   apt:
     name: "{{ item }}"
     state: "present"
@@ -9,7 +9,7 @@
     - 'python-pip'
   when: ansible_os_family == "Debian"
 
-- name: config_app_services | installing python modules
+- name: app_services | installing python modules
   pip:
     name: "{{ item }}"
     state: "present"
@@ -18,7 +18,7 @@
     - 'python-consul'
 
 # The below will eventually replace the app services by template lower down
-#- name: config_app_services | configuring consul app services
+#- name: app_services | configuring consul app services
 #  consul:
 #    check_id: "{{ item.check_id|default (omit) }}"
 #    check_name: "{{ item.check_name|default (omit) }}"
@@ -30,7 +30,7 @@
 #    tags: "{{ item.tags|default (omit) }}"
 #  with_items: consul_services
 
-- name: config_app_services | configuring consul app services
+- name: app_services | configuring consul app services
   template:
     src: "etc/consul.d/client/service.json.j2"
     dest: "{{ consul_config_dir }}/client/services.json"
