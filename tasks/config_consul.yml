@@ -209,6 +209,7 @@
     mode: "u=rw,g=r,o=r"
   register: "consul_reconfigured"
   no_log: true
+  become: true
   notify:
     - "restart consul"
   when: >
@@ -250,6 +251,7 @@
     group: "{{ consul_group }}"
     recurse: yes
     state: "directory"
+  become: true
   when: >
         inventory_hostname in groups[consul_clients_group]
 
@@ -260,6 +262,7 @@
     owner: "root"
     group: "root"
     mode: "u=rw,g=r,o=r"
+  become: true
   notify: "restart consul"
   when: >
         (ansible_distribution == "Ubuntu" and
@@ -274,6 +277,7 @@
     owner: root
     group: root
     mode: 0644
+  become: true
   notify: restart consul
   when: >
         (ansible_distribution == "Debian" or
@@ -287,6 +291,7 @@
   service:
     name: "consul"
     enabled: yes
+  become: true
   when: not ansible_check_mode
 
 # This ensures that configurations are in place prior to configuring app_services
@@ -294,6 +299,7 @@
   service:
     name: "consul"
     state: "restarted"
+  become: true
   when: >
         consul_reconfigured['changed'] and
         not ansible_check_mode
