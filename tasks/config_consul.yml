@@ -12,17 +12,20 @@
     creates: "{{ consul_bin_path }}/consul"
   when: not ansible_check_mode
 
+# We create the consul group
 - name: config_consul | creating consul group
   group:
     name: "{{ consul_group }}"
     state: present
 
+# We create the consul user and add it to the consul group
 - name: config_consul | creating consul user
   user:
     name: "{{ consul_user }}"
     group: "{{ consul_group }}"
     system: yes
 
+# We create the required consul configuration folders
 - name: config_consul | creating consul configuration folders
   file:
     path: "{{ item }}"
@@ -36,6 +39,7 @@
     - '{{ consul_config_dir }}/scripts'
 #    - '{{ consul_config_dir }}/server'
 
+# We create the consul data folder
 - name: config_consul | creating consul data folder
   file:
     path: "{{ consul_data_dir }}"
@@ -43,50 +47,141 @@
     group: "{{ consul_group }}"
     state: "directory"
 
-#- name: config_consul | generating consul encryption key
-#  command: "consul keygen"
-#  args:
-#    creates: "{{ consul_key_file }}"
-#  register: consul_encryption_key
+# We check for an existing encryption key
+# This is not the most secure and probably should be handled differently
+- name: config_consul | Checking If Consul Encryption Key Has Already Been Generated
+  stat:
+    path: "{{ consul_key_file }}"
+  register: "_consul_key_file"
+  when: inventory_hostname == consul_master
 
-#- name: config_consul | storing consul_encryption_key
-#  template:
-#    src: "etc/consul.key.j2"
-#    dest: "{{ consul_key_file }}"
-#    owner: root
-#    group: root
-#    mode: 0640
-#  when: consul_encryption_key.changed
+# We generate the encryption key if it does not already exist
+- name: config_consul | Generating Consul Encryption Key
+  command: "consul keygen"
+  register: "_consul_encryption_key"
+  no_log: true
+  when: >
+        inventory_hostname == consul_master and
+        not _consul_key_file['stat']['exists']
 
-#- name: config_consul | configuring consul master
-#  template:
-#    src: "templates/etc/consul.d/bootstrap/config.json.j2"
-#    dest: "{{ consul_config_dir }}/bootstrap/config.json"
-#    owner: root
-#    group: root
-#    mode: 0644
-#  when: >
-#        (inventory_hostname == consul_master)
+# We do this when consul encryption key has already been generated and stored
+- name: config_consul | Capturing Existing Consul Encryption Key
+  command: "cat {{ consul_key_file }}"
+  register: "_consul_encryption_key_read"
+  no_log: true
+  changed_when: false
+  when: >
+        inventory_hostname == consul_master and
+        _consul_key_file['stat']['exists']
 
-#- name: config_consul | configuring consul servers
-#  template:
-#    src: "templates/etc/consul.d/server/config.json.j2"
-#    dest: "{{ consul_config_dir }}/server/config.json"
-#    owner: root
-#    group: root
-#    mode: 0644
-#  when: >
-#        inventory_hostname in groups[consul_servers_group]
+# We do this when we generate a new encryption key
+- name: config_consul | Settting consul_encryption_key Fact On Consul Master
+  set_fact:
+    consul_encryption_key: "{{ _consul_encryption_key['stdout'] }}"
+  no_log: true
+  when: >
+       inventory_hostname == consul_master and
+       _consul_encryption_key['changed']
 
-#- name: config_consul | configuriing consul clients
-#  template:
-#    src: "templates/etc/consul.d/client/config.json.j2"
-#    dest: "{{ consul_config_dir }}/client/config.json"
-#    owner: root
-#    group: root
-#    mode: 0644
-#  when: >
-#        inventory_hostname in groups[consul_clients_group]
+# We do this when consul encryption key has already been generated and stored
+- name: config_consul | Settting consul_encryption_key Fact On Consul Master
+  set_fact:
+    consul_encryption_key: "{{ _consul_encryption_key_read['stdout'] }}"
+  no_log: true
+  when: >
+       inventory_hostname == consul_master and
+       _consul_key_file['stat']['exists']
+
+- name: config_consul | Setting consul_encryption_key Fact On Non Consul Master
+  set_fact:
+     consul_encryption_key: "{{ hostvars[consul_master]['consul_encryption_key'] }}"
+  no_log: true
+  when: >
+       inventory_hostname != consul_master
+
+# We store the encryption key on all of consul servers group in order to
+# preserve the key if for any reason consul_master were to disappear or crash
+# This is not the most secure and probably should be handled differently
+- name: config_consul | Storing Consul Encryption Key
+  template:
+    src: "etc/consul.key.j2"
+    dest: "{{ consul_key_file }}"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o="
+  no_log: true
+  when: >
+       inventory_hostname in groups[consul_servers_group]
+
+# This is not the most secure and probably should be handled differently
+- name: config_consul | Checking For Existing acl_master_token
+  stat:
+    path: "{{ consul_acl_master_token_file }}"
+  register: "_consul_acl_master_token_file"
+  changed_when: false
+  when: >
+        consul_enable_acls and
+        inventory_hostname == consul_master
+
+- name: config_consul | Generating consul_acl_master_token_file
+  command: "uuidgen"
+  register: "_consul_acl_master_token"
+  no_log: true
+  when: >
+        inventory_hostname == consul_master and
+        consul_enable_acls and
+        not _consul_acl_master_token_file['stat']['exists']
+
+# We do this when consul encryption key has already been generated and stored
+# This is not the most secure and probably should be handled differently
+- name: config_consul | Capturing Existing consul_acl_master_token_file
+  command: "cat {{ consul_acl_master_token_file }}"
+  register: "_consul_acl_master_token_read"
+  no_log: true
+  changed_when: false
+  when: >
+        inventory_hostname == consul_master and
+        _consul_acl_master_token_file['stat']['exists']
+
+- name: config_consul | Setting consul_acl_master_token On Consul Master
+  set_fact:
+    consul_acl_master_token: "{{ _consul_acl_master_token['stdout'] }}"
+  no_log: true
+  when: >
+        consul_enable_acls and
+        inventory_hostname == consul_master and
+        _consul_acl_master_token['changed']
+
+- name: config_consul | Setting consul_acl_master_token On Consul Master
+  set_fact:
+    consul_acl_master_token: "{{ _consul_acl_master_token_read['stdout'] }}"
+  no_log: true
+  when: >
+        consul_enable_acls and
+        inventory_hostname == consul_master and
+        _consul_acl_master_token_file['stat']['exists']
+
+- name: config_consul | Setting consul_acl_master_token On Non Consul Master
+  set_fact:
+    consul_acl_master_token: "{{ hostvars[consul_master]['consul_acl_master_token'] }}"
+  no_log: true
+  when: >
+        consul_enable_acls and
+        inventory_hostname != consul_master
+
+# We store the ACL Master Token on all of consul servers group in order to
+# preserve the key if for any reason consul_master were to disappear or crash
+# This is not the most secure and probably should be handled differently
+- name: config_consul | Storing Consul ACL Master Token
+  template:
+    src: "etc/consul_acl_master_token.j2"
+    dest: "{{ consul_acl_master_token_file }}"
+    owner: "root"
+    group: "root"
+    mode: "u=rw,g=r,o="
+  no_log: true
+  when: >
+       inventory_hostname in groups[consul_servers_group]
 
 - name: config_consul | configuring consul
   template:
@@ -96,6 +191,7 @@
     group: "root"
     mode: "u=rw,g=r,o=r"
   register: "consul_reconfigured"
+  no_log: true
   notify:
     - "restart consul"
   when: >
