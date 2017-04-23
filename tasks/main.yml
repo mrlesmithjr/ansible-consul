@@ -17,14 +17,19 @@
 - include: services.yml
 
 - include: clients.yml
-  when: inventory_hostname in groups[consul_clients_group]
+  when: >
+        (consul_cluster and
+        inventory_hostname in groups[consul_clients_group]) or
+        not consul_cluster
 
 - include: app_services.yml
   tags:
     - consul-app-services
   when: >
         consul_services is defined and
-        inventory_hostname in groups[consul_clients_group]
+        (consul_cluster and
+        inventory_hostname in groups[consul_clients_group]) or
+        not consul_cluster
 
 - include: dnsmasq.yml
   when: >

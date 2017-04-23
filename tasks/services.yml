@@ -1,5 +1,5 @@
 ---
-- name: services | configuring consul init service (Ubuntu)
+- name: services | configuring consul service (upstart)
   template:
     src: "etc/init/consul.conf.j2"
     dest: "/etc/init/consul.conf"
@@ -8,13 +8,9 @@
     mode: "u=rw,g=r,o=r"
   become: true
   notify: "restart consul"
-  when: >
-        (ansible_distribution == "Ubuntu" and
-        ansible_distribution_version <= '14.04') and
-        (inventory_hostname in groups[consul_clients_group] or
-        inventory_hostname in groups[consul_servers_group])
+  when: ansible_service_mgr == "upstart"
 
-- name: services | configuring consul systemd service
+- name: services | configuring consul service (systemd)
   template:
     src: "etc/systemd/system/consul.service.j2"
     dest: "/etc/systemd/system/consul.service"
@@ -23,13 +19,7 @@
     mode: 0644
   become: true
   notify: restart consul
-  when: >
-        (ansible_distribution == "Debian" or
-        (ansible_distribution == "Ubuntu" and
-        ansible_distribution_version >= '16.04') or
-        ansible_os_family == "RedHat") and
-        (inventory_hostname in groups[consul_clients_group] or
-        inventory_hostname in groups[consul_servers_group])
+  when: ansible_service_mgr == "systemd"
 
 - name: services | ensuring consul service is enabled
   service:
