@@ -3,6 +3,7 @@
   get_url:
     url: "{{ consul_dl_url }}/{{ consul_dl_file }}"
     dest: "/opt"
+  become: true
 
 - name: config_consul | extracting consul binary
   unarchive:
@@ -10,6 +11,7 @@
     dest: "{{ consul_bin_path }}"
     copy: no
     creates: "{{ consul_bin_path }}/consul"
+  become: true
   when: not ansible_check_mode
 
 # We create the consul group
@@ -17,6 +19,7 @@
   group:
     name: "{{ consul_group }}"
     state: present
+  become: true
 
 # We create the consul user and add it to the consul group
 - name: config_consul | creating consul user
@@ -24,6 +27,7 @@
     name: "{{ consul_user }}"
     group: "{{ consul_group }}"
     system: yes
+  become: true
 
 # We create the required consul configuration folders
 - name: config_consul | creating consul configuration folders
@@ -32,6 +36,7 @@
     owner: "root"
     group: "root"
     state: "directory"
+  become: true
   with_items:
     - '{{ consul_config_dir }}'
 #    - '{{ consul_config_dir }}/bootstrap'
@@ -46,6 +51,7 @@
     owner: "{{ consul_user }}"
     group: "{{ consul_group }}"
     state: "directory"
+  become: true
 
 # We check for an existing encryption key
 # This is not the most secure and probably should be handled differently
@@ -70,6 +76,7 @@
   register: "_consul_encryption_key_read"
   no_log: true
   changed_when: false
+  become: true
   when: >
         inventory_hostname == consul_master and
         _consul_key_file['stat']['exists']
@@ -113,6 +120,7 @@
     group: "root"
     mode: "u=rw,g=r,o="
   no_log: true
+  become: true
   when: >
         inventory_hostname in groups[consul_servers_group] and
         not ansible_check_mode
@@ -143,6 +151,7 @@
   register: "_consul_acl_master_token_read"
   no_log: true
   changed_when: false
+  become: true
   when: >
         inventory_hostname == consul_master and
         _consul_acl_master_token_file['stat']['exists']
@@ -186,6 +195,7 @@
     group: "root"
     mode: "u=rw,g=r,o="
   no_log: true
+  become: true
   when: >
         inventory_hostname in groups[consul_servers_group] and
         not ansible_check_mode
@@ -210,6 +220,7 @@
   file:
     path: "{{ consul_home }}"
     state: "directory"
+  become: true
   when: >
         inventory_hostname in groups[consul_clients_group]
 
@@ -217,6 +228,7 @@
   get_url:
     url: "{{ consul_dl_url }}/{{ consul_ui_dl_file }}"
     dest: "/opt"
+  become: true
   when: >
         inventory_hostname in groups[consul_clients_group]
 
@@ -226,6 +238,7 @@
     dest: "{{ consul_home }}"
     copy: no
     creates: "{{ consul_home }}/index.html"
+  become: true
   when: >
         inventory_hostname in groups[consul_clients_group] and
         not ansible_check_mode
