@@ -32,9 +32,11 @@
 {%       endfor %}
 {%     set _config = config_json.update({"retry_join": _temp_retry_join}) %}
 {%   endif %}
-{%   if inventory_hostname in groups[consul_clients_group] %}
-{%     set _config = config_json.update({"server": false}) %}
-{%     set _config = config_json.update({"ui_dir": consul_home}) %}
+{%   if groups[consul_clients_group] is defined %}
+{%     if inventory_hostname in groups[consul_clients_group] %}
+{%       set _config = config_json.update({"server": false}) %}
+{%       set _config = config_json.update({"ui_dir": consul_home}) %}
+{%     endif %}
 {%   endif %}
 {{ config_json|to_nice_json }}
 {% endif %}
