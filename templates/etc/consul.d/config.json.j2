@@ -18,16 +18,16 @@
 {%     set _config = config_json.update({"bootstrap": true}) %}
 {%     set _config = config_json.update({"server": true}) %}
 {%   endif %}
-{%   if inventory_hostname != consul_master and inventory_hostname in groups[consul_servers_group] %}
+{%   if inventory_hostname != consul_master and inventory_hostname in groups[consul_servers_group] and inventory_hostname in play_hosts %}
 {%     set _config = config_json.update({"bootstrap_expect": (groups[consul_servers_group]|count)|round(0, 'ceil')|int}) %}
 {%     set _config = config_json.update({"server": true}) %}
 {%   endif %}
 {%   if inventory_hostname != consul_master %}
 {%     set _temp_retry_join = [] %}
 {%       for host in groups[consul_servers_group] %}
-{%         if inventory_hostname != host %}
-{%         set _temp_ip = hostvars[host]['consul_bind_address'] %}
-{%         set _temp_retry_join = _temp_retry_join.append(_temp_ip) %}
+{%         if inventory_hostname != host and host in play_hosts %}
+{%           set _temp_ip = hostvars[host]['consul_bind_address'] %}
+{%           set _temp_retry_join = _temp_retry_join.append(_temp_ip) %}
 {%         endif %}
 {%       endfor %}
 {%     set _config = config_json.update({"retry_join": _temp_retry_join}) %}
