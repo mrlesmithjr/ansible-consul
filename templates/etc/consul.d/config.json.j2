@@ -23,7 +23,7 @@
 {%   for host in groups[consul_servers_group] %}
 {%     if inventory_hostname != host %}
 {%       set _temp_ip = hostvars[host]['consul_bind_address'] %}
-{%       set _temp_retry_join = _temp_retry_join.append(_temp_ip) %}
+{%       set _ = _temp_retry_join.append(_temp_ip) %}
 {%     endif %}
 {%   endfor %}
 {%     set _config = config_json.update({"retry_join": _temp_retry_join}) %}
