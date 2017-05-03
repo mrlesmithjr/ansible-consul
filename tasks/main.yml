@@ -16,11 +16,6 @@
 
 - include: services.yml
 
-- include: clients.yml
-  when: >
-        ((groups[consul_clients_group] is defined and inventory_hostname
-        in groups[consul_clients_group]))
-
 - include: app_services.yml
   tags:
     - consul-app-services
