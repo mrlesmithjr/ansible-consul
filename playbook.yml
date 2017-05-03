@@ -36,6 +36,7 @@
   become: true
   vars:
     consul_bind_interface: 'enp0s8'
+    consul_ui: true
     install_nginx: true
     install_redis: true
     pri_domain_name: 'test.vagrant.local'

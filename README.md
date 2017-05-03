@@ -93,7 +93,6 @@ consul_enable_dnsmasq: true
 # consul_encryption_key: 'qLLp1YCJzp9E/xhg11qkdQ=='
 
 consul_group: 'consul'
-consul_home: '/opt/consul'
 consul_key_file: '/etc/consul.key'
 consul_log_file: '/var/log/consul'
 
@@ -143,7 +142,7 @@ consul_services:
       - name: 'redis check'
       - interval: 10s
       - script: '/var/lib/redis/bin/redis-cli ping'
-consul_ui_dl_file: 'consul_{{ consul_version }}_web_ui.zip'
+consul_ui: false
 consul_user: 'consul'
 consul_version: '0.8.1'
 consul_wan_group: 'consul_wan'
