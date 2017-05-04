@@ -13,21 +13,21 @@ Requirements
 
 Define your consul servers and clients into their respective Ansible groups in
 you inventory file. And ensure to update the default vars for consul_clients_group
-and consul_servers_group to match.  
+and consul_servers_group to match.
 
 Vagrant
 -------
-You can spin up a 5-node Consul environment for testing by doing the following:  
+You can spin up a 5-node Consul environment for testing by doing the following:
 
-Spin up environment  
+Spin up environment
 ```
 vagrant up
 ```
 
 This should bring up an environment with a 3-node Consul cluster and 2 nodes
-running redis and nginx for service discovery and testing.  
+running redis and nginx for service discovery and testing.
 
-You can view the consul web-ui by using your browser to open  
+You can view the consul web-ui by using your browser to open
 - [node3]
 - [node4]
 
@@ -94,7 +94,6 @@ consul_enable_dnsmasq: true
 
 consul_group: 'consul'
 consul_key_file: '/etc/consul.key'
-consul_log_file: '/var/log/consul'
 
 consul_mysql_password: 'consul'
 consul_mysql_user: 'consul'
