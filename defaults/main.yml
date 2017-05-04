@@ -20,10 +20,6 @@ consul_bind_interface: "{{ ansible_default_ipv4['interface'] }}"
 # either set to 0.0.0.0 (default) or consul_bind_address var.
 consul_client_address: '0.0.0.0'
 
-# Defines Ansible group that nodes belong to which are clients
-# (agents or services running on)
-consul_clients_group: 'consul_clients'
-
 # Defines if setting up cluster (default)
 # currently does not work as only standalone but adding in ability for testing
 # purposes at a later time

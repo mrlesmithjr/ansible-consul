@@ -11,23 +11,24 @@ Build Status
 Requirements
 ------------
 
-Define your consul servers and clients into their respective Ansible groups in
-you inventory file. And ensure to update the default vars for consul_clients_group
-and consul_servers_group to match.  
+Define your Ansible host group name of consul servers within ``consul_servers_group``.
+
+Attaching the role to a group of servers NOT being in the group of ``consul_servers_group`` will treat them as consul clients joining the servers inside ``consul_servers_group``.
+
 
 Vagrant
 -------
-You can spin up a 5-node Consul environment for testing by doing the following:  
+You can spin up a 5-node Consul environment for testing by doing the following:
 
-Spin up environment  
+Spin up environment
 ```
 vagrant up
 ```
 
 This should bring up an environment with a 3-node Consul cluster and 2 nodes
-running redis and nginx for service discovery and testing.  
+running redis and nginx for service discovery and testing.
 
-You can view the consul web-ui by using your browser to open  
+You can view the consul web-ui by using your browser to open
 - [node3]
 - [node4]
 
@@ -62,10 +63,6 @@ consul_bind_interface: "{{ ansible_default_ipv4['interface'] }}"
 # Defines client address to listen on
 # either set to 0.0.0.0 (default) or consul_bind_address var.
 consul_client_address: '0.0.0.0'
-
-# Defines Ansible group that nodes belong to which are clients
-# (agents or services running on)
-consul_clients_group: 'consul_clients'
 
 # Defines if setting up cluster (default)
 # currently does not work as only standalone but adding in ability for testing
@@ -159,6 +156,7 @@ Example Playbook
 ```
 - hosts: all
   vars:
+    - consul_servers_group: 'consulservers'
     - pri_domain_name: 'test.vagrant.local'
   roles:
     - role: ansible-ntp
