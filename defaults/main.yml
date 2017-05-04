@@ -51,7 +51,6 @@ consul_enable_dnsmasq: true
 
 consul_group: 'consul'
 consul_key_file: '/etc/consul.key'
-consul_log_file: '/var/log/consul'
 
 consul_mysql_password: 'consul'
 consul_mysql_user: 'consul'
