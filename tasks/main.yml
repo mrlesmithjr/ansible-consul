@@ -20,8 +20,8 @@
   tags:
     - consul-app-services
   when: >
-        ((groups[consul_clients_group] is defined and inventory_hostname
-        in groups[consul_clients_group])) and consul_services is defined
+        consul_services is defined and
+        consul_services
 
 - include: dnsmasq.yml
   when: >
