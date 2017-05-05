@@ -42,6 +42,44 @@
     pri_domain_name: 'test.vagrant.local'
     redis_replication_ansible_group: 'redis_replicator' # from nodes.yml
     redis_replication_interface: '{{ consul_bind_interface }}'
+    consul_services:
+      - name: elasticsearch
+        port: 9200
+        tags:
+          - elasticsearch
+          - es
+          - testing
+        checks:
+          - id: 'es-check'
+          - name: 'elasticsearch check'
+          - interval: 10s
+          - script: 'curl localhost:9200 > /dev/null 2>&1'
+      # - name: mysql
+      #   port: 3306
+      #   tags:
+      #     - mysql
+      #     - testing
+      #   checks:
+      #     - interval: 10s
+      #     - script: "mysql -u{{ consul_mysql_user }} -p{{ consul_mysql_password }} -h localhost -e 'select now()'"
+      # - name: nginx
+      #   port: 80
+      #   tags:
+      #     - nginx
+      #     # - testing
+      #   checks:
+      #     - interval: 10s
+      #     - script: 'curl localhost:80 > /dev/null 2>&1'
+      - name: redis
+        port: 6379
+        tags:
+          - redis
+          - testing
+        checks:
+          - id: 'redis-check'
+          - name: 'redis check'
+          - interval: 10s
+          - script: '/var/lib/redis/bin/redis-cli ping'
   roles:
     - role: ansible-nginx
       when: >

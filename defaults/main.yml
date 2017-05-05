@@ -55,45 +55,9 @@ consul_mysql_user: 'consul'
 consul_servers_group: 'consul_servers'
 
 # Define services to register and checks to ensure those services
-# are running on clients
-consul_services:
-  - name: elasticsearch
-    port: 9200
-    tags:
-      - elasticsearch
-      - es
-      - testing
-    checks:
-      - id: 'es-check'
-      - name: 'elasticsearch check'
-      - interval: 10s
-      - script: 'curl localhost:9200 > /dev/null 2>&1'
-  # - name: mysql
-  #   port: 3306
-  #   tags:
-  #     - mysql
-  #     - testing
-  #   checks:
-  #     - interval: 10s
-  #     - script: "mysql -u{{ consul_mysql_user }} -p{{ consul_mysql_password }} -h localhost -e 'select now()'"
-  # - name: nginx
-  #   port: 80
-  #   tags:
-  #     - nginx
-  #     # - testing
-  #   checks:
-  #     - interval: 10s
-  #     - script: 'curl localhost:80 > /dev/null 2>&1'
-  - name: redis
-    port: 6379
-    tags:
-      - redis
-      - testing
-    checks:
-      - id: 'redis-check'
-      - name: 'redis check'
-      - interval: 10s
-      - script: '/var/lib/redis/bin/redis-cli ping'
+# are running on clients. See playbook.yml for examples.
+consul_services: []
+
 consul_ui: false
 consul_user: 'consul'
 consul_version: '0.8.1'
