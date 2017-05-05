@@ -40,18 +40,18 @@
     install_nginx: true
     install_redis: true
     pri_domain_name: 'test.vagrant.local'
-    redis_replication_ansible_group: 'consul_clients'
+    redis_replication_ansible_group: 'redis_replicator' # from nodes.yml
     redis_replication_interface: '{{ consul_bind_interface }}'
   roles:
     - role: ansible-nginx
       when: >
-            inventory_hostname in groups[consul_clients_group] and
+            inventory_hostname not in groups[consul_servers_group] and
             (install_nginx is defined and
             install_nginx)
     - role: ansible-ntp
     - role: ansible-redis
       when: >
-            inventory_hostname in groups[consul_clients_group] and
+            inventory_hostname not in groups[consul_servers_group] and
             (install_redis is defined and
             install_redis)
     - role: ansible-consul
@@ -63,7 +63,7 @@
         name: "nginx"
         state: "absent"
       when: >
-            inventory_hostname in groups[consul_clients_group] and
+            inventory_hostname not in groups[consul_servers_group] and
             (install_nginx is defined and
             not install_nginx)
 
@@ -72,6 +72,6 @@
         name: "redis"
         state: "absent"
       when: >
-            inventory_hostname in groups[consul_clients_group] and
+            inventory_hostname not in groups[consul_servers_group] and
             (install_redis is defined and
             not install_redis)
