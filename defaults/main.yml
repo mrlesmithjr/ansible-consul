@@ -45,7 +45,9 @@ consul_enable_dnsmasq: true
 # make sure to generate a new key and replace this
 # consul_encryption_key: 'qLLp1YCJzp9E/xhg11qkdQ=='
 
+consul_user: 'consul'
 consul_group: 'consul'
+consul_runas_user: true
 consul_key_file: '/etc/consul.key'
 
 consul_mysql_password: 'consul'
@@ -59,6 +61,5 @@ consul_servers_group: 'consul_servers'
 consul_services: []
 
 consul_ui: false
-consul_user: 'consul'
 consul_version: '0.8.1'
 consul_wan_group: 'consul_wan'

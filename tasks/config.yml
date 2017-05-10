@@ -35,6 +35,7 @@
     path: "{{ consul_data_dir }}"
     owner: "{{ consul_user }}"
     group: "{{ consul_group }}"
+    recurse: yes
     state: "directory"
   become: true
 
