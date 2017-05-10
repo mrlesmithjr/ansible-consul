@@ -47,6 +47,7 @@ consul_enable_dnsmasq: true
 
 consul_user: 'consul'
 consul_group: 'consul'
+# Defines weather the consul service should run as consul_user/consul_group or not
 consul_runas_user: true
 consul_key_file: '/etc/consul.key'
 
