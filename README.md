@@ -87,7 +87,9 @@ consul_enable_dnsmasq: true
 
 # Generate using 'consul keygen'
 # make sure to generate a new key and replace this
-# consul_encryption_key: 'qLLp1YCJzp9E/xhg11qkdQ=='
+# also update key if you changed the it in your cluster via 'consul keyring',
+# otherwise the role may deploy an outdated key to additional nodes which then can't join the cluster
+consul_encryption_key: 'qLLp1YCJzp9E/xhg11qkdQ=='
 
 consul_group: 'consul'
 consul_key_file: '/etc/consul.key'
