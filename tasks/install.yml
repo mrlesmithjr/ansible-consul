@@ -20,3 +20,4 @@
   become: true
   notify:
     - restart consul
+  when: not ansible_check_mode
