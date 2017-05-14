@@ -54,6 +54,9 @@ consul_acl_down_policy: 'extend-cache'
 consul_acl_master_token_file: '/etc/consul_acl_master_token'
 
 consul_bin_path: '/usr/local/bin'
+consul_bin_owner: "{{ consul_user }}"
+consul_bin_group: "{{ consul_group }}"
+consul_bin_mode: '0750'
 
 # consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
 
