@@ -5,6 +5,7 @@
     path: "{{ consul_data_dir}}/serf/local.keyring"
   register: keyring_exists
   ignore_errors: true
+  become: true
 
 - block:
   # Gather the currently used encryption key of the cluster
@@ -12,11 +13,13 @@
     slurp:
       src: "{{ consul_data_dir}}/serf/local.keyring"
     register: keyring_value
+    become: true
 
   # Set consul_encryption_key_active to allow comparison in next step
   - name: cluster | Set fact consul_encryption_key_active
     set_fact:
       consul_encryption_key_active: "{{ keyring_value.content  | b64decode | from_json |  json_query('[0]') }}"
+    become: true
 
   # Inform the user the the node's key does not match his given key in consul_encryption_key and remove the host from play
   - name: cluster | Compare active key with consul_encryption_key
@@ -26,6 +29,7 @@
           The active key can be found locally in {{ consul_data_dir}}/serf/local.keyring"
           Update the variable consul_encryption_key!
           Removing node from play.
+    become: true
     when: consul_encryption_key_active != consul_encryption_key
 
   when: keyring_exists.stat.exists
