@@ -10,6 +10,8 @@
 - include: redhat.yml
   when: ansible_os_family == "RedHat"
 
+- include: accounts.yml
+
 - include: install.yml
 
 - include: config.yml
