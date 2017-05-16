@@ -11,6 +11,7 @@
 - name: cluster | Generating Consul Encryption Key
   command: "consul keygen"
   register: "_consul_encryption_key"
+  become: true
   no_log: true
   when: >
         inventory_hostname == consul_master and
