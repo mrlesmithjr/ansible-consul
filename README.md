@@ -54,6 +54,9 @@ consul_acl_down_policy: 'extend-cache'
 consul_acl_master_token_file: '/etc/consul_acl_master_token'
 
 consul_bin_path: '/usr/local/bin'
+consul_bin_owner: "{{ consul_user }}"
+consul_bin_group: "{{ consul_group }}"
+consul_bin_mode: '0750'
 
 # consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
 
@@ -91,7 +94,10 @@ consul_enable_dnsmasq: true
 # otherwise the role may deploy an outdated key to additional nodes which then can't join the cluster
 consul_encryption_key: 'qLLp1YCJzp9E/xhg11qkdQ=='
 
+consul_user: 'consul'
 consul_group: 'consul'
+# Defines weather the consul service should run as consul_user/consul_group or not
+consul_runas_user: true
 consul_key_file: '/etc/consul.key'
 
 consul_mysql_password: 'consul'
@@ -105,7 +111,7 @@ consul_servers_group: 'consul_servers'
 consul_services: []
 
 consul_ui: false
-consul_user: 'consul'
+
 consul_version: '0.8.1'
 consul_wan_group: 'consul_wan'
 ```
