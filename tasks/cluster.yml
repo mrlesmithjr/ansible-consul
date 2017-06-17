@@ -18,7 +18,8 @@
   # Set consul_encryption_key_active to allow comparison in next step
   - name: cluster | Set fact consul_encryption_key_active
     set_fact:
-      consul_encryption_key_active: "{{ keyring_value.content  | b64decode | from_json |  json_query('[0]') }}"
+      consul_encryption_key_active: "{{ keyring_value['content'] | b64decode | from_json | first }}"
+    no_log: true
     become: true
 
   # Inform the user the the node's key does not match his given key in consul_encryption_key and remove the host from play
