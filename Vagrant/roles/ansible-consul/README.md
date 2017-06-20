@@ -11,23 +11,24 @@ Build Status
 Requirements
 ------------
 
-Define your consul servers and clients into their respective Ansible groups in
-you inventory file. And ensure to update the default vars for consul_clients_group
-and consul_servers_group to match.  
+Define your Ansible host group name of consul servers within ``consul_servers_group``.
+
+Attaching the role to a group of servers NOT being in the group of ``consul_servers_group`` will treat them as consul clients joining the servers inside ``consul_servers_group``.
+
 
 Vagrant
 -------
-You can spin up a 5-node Consul environment for testing by doing the following:  
+You can spin up a 5-node Consul environment for testing by doing the following:
 
-Spin up environment  
+Spin up environment
 ```
 vagrant up
 ```
 
 This should bring up an environment with a 3-node Consul cluster and 2 nodes
-running redis and nginx for service discovery and testing.  
+running redis and nginx for service discovery and testing.
 
-You can view the consul web-ui by using your browser to open  
+You can view the consul web-ui by using your browser to open
 - [node3]
 - [node4]
 
@@ -53,6 +54,9 @@ consul_acl_down_policy: 'extend-cache'
 consul_acl_master_token_file: '/etc/consul_acl_master_token'
 
 consul_bin_path: '/usr/local/bin'
+consul_bin_owner: "{{ consul_user }}"
+consul_bin_group: "{{ consul_group }}"
+consul_bin_mode: '0750'
 
 # consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
 
@@ -62,10 +66,6 @@ consul_bind_interface: "{{ ansible_default_ipv4['interface'] }}"
 # Defines client address to listen on
 # either set to 0.0.0.0 (default) or consul_bind_address var.
 consul_client_address: '0.0.0.0'
-
-# Defines Ansible group that nodes belong to which are clients
-# (agents or services running on)
-consul_clients_group: 'consul_clients'
 
 # Defines if setting up cluster (default)
 # currently does not work as only standalone but adding in ability for testing
@@ -90,12 +90,15 @@ consul_enable_dnsmasq: true
 
 # Generate using 'consul keygen'
 # make sure to generate a new key and replace this
-# consul_encryption_key: 'qLLp1YCJzp9E/xhg11qkdQ=='
+# also update key if you changed the it in your cluster via 'consul keyring',
+# otherwise the role may deploy an outdated key to additional nodes which then can't join the cluster
+consul_encryption_key: 'qLLp1YCJzp9E/xhg11qkdQ=='
 
+consul_user: 'consul'
 consul_group: 'consul'
-consul_home: '/opt/consul'
+# Defines weather the consul service should run as consul_user/consul_group or not
+consul_runas_user: true
 consul_key_file: '/etc/consul.key'
-consul_log_file: '/var/log/consul'
 
 consul_mysql_password: 'consul'
 consul_mysql_user: 'consul'
@@ -104,47 +107,11 @@ consul_mysql_user: 'consul'
 consul_servers_group: 'consul_servers'
 
 # Define services to register and checks to ensure those services
-# are running on clients
-consul_services:
-  - name: elasticsearch
-    port: 9200
-    tags:
-      - elasticsearch
-      - es
-      - testing
-    checks:
-      - id: 'es-check'
-      - name: 'elasticsearch check'
-      - interval: 10s
-      - script: 'curl localhost:9200 > /dev/null 2>&1'
-  # - name: mysql
-  #   port: 3306
-  #   tags:
-  #     - mysql
-  #     - testing
-  #   checks:
-  #     - interval: 10s
-  #     - script: "mysql -u{{ consul_mysql_user }} -p{{ consul_mysql_password }} -h localhost -e 'select now()'"
-  # - name: nginx
-  #   port: 80
-  #   tags:
-  #     - nginx
-  #     # - testing
-  #   checks:
-  #     - interval: 10s
-  #     - script: 'curl localhost:80 > /dev/null 2>&1'
-  - name: redis
-    port: 6379
-    tags:
-      - redis
-      - testing
-    checks:
-      - id: 'redis-check'
-      - name: 'redis check'
-      - interval: 10s
-      - script: '/var/lib/redis/bin/redis-cli ping'
-consul_ui_dl_file: 'consul_{{ consul_version }}_web_ui.zip'
-consul_user: 'consul'
+# are running on clients. See playbook.yml for examples.
+consul_services: []
+
+consul_ui: false
+
 consul_version: '0.8.1'
 consul_wan_group: 'consul_wan'
 ```
@@ -160,6 +127,7 @@ Example Playbook
 ```
 - hosts: all
   vars:
+    - consul_servers_group: 'consulservers'
     - pri_domain_name: 'test.vagrant.local'
   roles:
     - role: ansible-ntp

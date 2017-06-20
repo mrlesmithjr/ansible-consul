@@ -18,7 +18,9 @@
     group: root
     mode: 0644
   become: true
-  notify: restart consul
+  notify:
+    - reload systemd
+    - restart consul
   when: ansible_service_mgr == "systemd"
 
 - name: services | ensuring consul service is enabled
