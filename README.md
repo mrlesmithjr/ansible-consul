@@ -110,6 +110,11 @@ consul_servers_group: 'consul_servers'
 # are running on clients. See playbook.yml for examples.
 consul_services: []
 
+# Set telemetry options for Consul. See official documentation for all options possible.
+consul_telemetry: {}
+#   statsd_address: '127.0.0.1:9125'
+#   disable_hostname: true
+
 consul_ui: false
 
 consul_version: '0.8.1'
