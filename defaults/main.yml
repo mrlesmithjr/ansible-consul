@@ -23,6 +23,9 @@ consul_bind_interface: "{{ ansible_default_ipv4['interface'] }}"
 # either set to 0.0.0.0 (default) or consul_bind_address var.
 consul_client_address: '0.0.0.0'
 
+# Defines the name of the node inside the Consul cluster.
+consul_node_name: "{{ ansible_hostname }}"
+
 # Defines if setting up cluster (default)
 # currently does not work as only standalone but adding in ability for testing
 # purposes at a later time
