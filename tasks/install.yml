@@ -1,4 +1,18 @@
 ---
+- name: install | try to determine current consul version
+  command: consul version | head -1 | cut -d 'v' -f2
+  register: consul_version_installed
+  ignore_errors: true
+  changed_when: false
+  when: consul_upgrade
+
+- name: install | backup current binary as fallback
+  shell: "mv {{ consul_bin_path }}/consul {{ consul_bin_path }}/consul_backup"
+  when: consul_upgrade and
+        consul_version_installed|success and
+        consul_version_installed.stdout < consul_version and
+        not ansible_check_mode
+
 - name: install | download and extract consul
   unarchive:
     src: "{{ consul_dl_url }}/{{ consul_dl_file }}"
@@ -9,7 +23,25 @@
     group: "{{ consul_bin_group }}"
     mode: "{{ consul_bin_mode }}"
   become: true
+  ignore_errors: true
+  register: consul_download_extract
+  notify:
+    - restart consul
   when: not ansible_check_mode
+
+- name: install | restoring former binary as upgrade failed
+  shell: "mv {{ consul_bin_path }}/consul_backup {{ consul_bin_path }}/consul"
+  register: consul_binary_restore
+  notify:
+    - restart consul
+  when: consul_download_extract|failed and
+        not ansible_check_mode
+
+- name: install | remove not required binary backup
+  file:
+    path: "{{ consul_bin_path }}/consul_backup"
+    state: absent
+  when: consul_download_extract|success
 
 - name: install | ensure binary ownership and mode
   file:
