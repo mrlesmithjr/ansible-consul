@@ -124,6 +124,7 @@ consul_version: '0.8.1'
 
 # Defines if role upgrades consul binary on servers to consul_version
 # Downgrades are not considered
+# Consider using `--fork=1` to keep the impact to the cluster low
 consul_upgrade: false
 
 consul_wan_group: 'consul_wan'
