@@ -43,6 +43,10 @@ consul_dl_url: 'https://releases.hashicorp.com/consul/{{ consul_version }}'
 
 consul_enable_acls: true
 
+# Generated using 'uuidgen'
+# make sure to generate a new token and replace this one
+consul_acl_master_token: 'a5ac5cb6-c0d1-4aa3-bf9a-ca3507adc7ed'
+
 # Defines if dnsmasq should be installed and configured to resolv
 # consul dns queries to port 8600
 consul_enable_dnsmasq: true
