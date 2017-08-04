@@ -1,15 +1,23 @@
 ---
-- name: install | try to determine current consul version
-  shell: consul version | head -1 | cut -d 'v' -f2
-  register: consul_version_installed
+- name: install | check if consul binary is installed
+  stat:
+    path: "{{ consul_bin_path }}/consul"
+  register: consul_binary_exists
   ignore_errors: true
+  become: true
+
+- name: install | try to determine current consul version
+  shell: "{{ consul_bin_path }}/consul version | head -1 | cut -d 'v' -f2"
+  register: consul_version_installed
   changed_when: false
-  when: consul_upgrade
+  when: consul_upgrade and
+        consul_binary_exists.stat.exists
 
 - name: install | backup current binary as fallback
   shell: "mv {{ consul_bin_path }}/consul {{ consul_bin_path }}/consul_backup"
+  register: consul_binary_backup
   when: consul_upgrade and
-        consul_version_installed|success and
+        consul_binary_exists.stat.exists and
         consul_version_installed.stdout < consul_version and
         not ansible_check_mode
 
@@ -35,6 +43,7 @@
   notify:
     - restart consul
   when: consul_download_extract|failed and
+        consul_binary_backup|success and
         not ansible_check_mode
 
 - name: install | remove not required binary backup
