@@ -16,6 +16,7 @@
 - name: install | backup current binary as fallback
   shell: "mv {{ consul_bin_path }}/consul {{ consul_bin_path }}/consul_backup"
   register: consul_binary_backup
+  become: true
   when: consul_upgrade and
         consul_binary_exists.stat.exists and
         consul_version_installed.stdout < consul_version and
@@ -39,6 +40,7 @@
 
 - name: install | restoring former binary as upgrade failed
   shell: "mv {{ consul_bin_path }}/consul_backup {{ consul_bin_path }}/consul"
+  become: true
   register: consul_binary_restore
   notify:
     - restart consul
