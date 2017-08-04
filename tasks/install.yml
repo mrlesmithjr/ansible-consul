@@ -1,6 +1,6 @@
 ---
 - name: install | try to determine current consul version
-  command: consul version | head -1 | cut -d 'v' -f2
+  shell: consul version | head -1 | cut -d 'v' -f2
   register: consul_version_installed
   ignore_errors: true
   changed_when: false
