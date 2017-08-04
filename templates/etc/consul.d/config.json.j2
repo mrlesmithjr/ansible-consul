@@ -1,7 +1,7 @@
 {% if consul_cluster %}
 {% set config_json = {} %}
 {%   if consul_enable_acls %}
-{%     set _config = config_json.update({"acl_datacenter": consul_datacenter}) %}
+{%     set _config = config_json.update({"acl_datacenter": consul_acl_datacenter}) %}
 {%     set _config = config_json.update({"acl_default_policy": consul_acl_default_policy}) %}
 {%     set _config = config_json.update({"acl_down_policy": consul_acl_down_policy}) %}
 {%     if inventory_hostname in groups[consul_servers_group] %}
