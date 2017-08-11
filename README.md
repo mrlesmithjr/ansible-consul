@@ -120,7 +120,7 @@ consul_telemetry: {}
 
 consul_ui: false
 
-consul_version: '0.8.1'
+consul_version: '0.9.0'
 
 # Defines if role upgrades consul binary on servers to consul_version
 # Downgrades are not considered
