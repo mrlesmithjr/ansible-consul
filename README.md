@@ -51,8 +51,6 @@ consul_acl_default_policy: 'allow'
 # Either "allow", "deny" or "extend-cache"; "extend-cache" is the default.
 consul_acl_down_policy: 'extend-cache'
 
-consul_acl_master_token_file: '/etc/consul_acl_master_token'
-
 consul_bin_path: '/usr/local/bin'
 consul_bin_owner: "{{ consul_user }}"
 consul_bin_group: "{{ consul_group }}"
@@ -87,6 +85,13 @@ consul_dl_url: 'https://releases.hashicorp.com/consul/{{ consul_version }}'
 
 consul_enable_acls: true
 
+# Generated using 'uuidgen'
+# make sure to generate a new token and replace this one
+consul_acl_master_token: 'a5ac5cb6-c0d1-4aa3-bf9a-ca3507adc7ed'
+
+# Defines the acl_datacenter which is authoritative for ACL information.
+consul_acl_datacenter: "{{ consul_datacenter }}"
+
 # Defines if dnsmasq should be installed and configured to resolv
 # consul dns queries to port 8600
 consul_enable_dnsmasq: true
@@ -120,7 +125,7 @@ consul_telemetry: {}
 
 consul_ui: false
 
-consul_version: '0.8.1'
+consul_version: '0.9.0'
 
 # Defines if role upgrades consul binary on servers to consul_version
 # Downgrades are not considered
