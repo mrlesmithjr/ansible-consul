@@ -12,6 +12,9 @@
 {%     set _config = config_json.update({"client_addr": consul_client_address}) %}
 {%     set _config = config_json.update({"data_dir": consul_data_dir}) %}
 {%     set _config = config_json.update({"datacenter": consul_datacenter}) %}
+{%   if consul_dns_config %}
+{%     set _config = config_json.update({"dns_config": consul_dns_config}) %}
+{%   endif %}
 {%     set _config = config_json.update({"enable_syslog": true}) %}
 {%     set _config = config_json.update({"encrypt": consul_encryption_key}) %}
 {%     set _config = config_json.update({"log_level": "INFO"}) %}

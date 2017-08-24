@@ -39,6 +39,11 @@ consul_datacenter: 'dc1'
 consul_dl_file: 'consul_{{ consul_version }}_linux_amd64.zip'
 consul_dl_url: 'https://releases.hashicorp.com/consul/{{ consul_version }}'
 
+# Set dns_config options for Consul. See official documentation for all options possible.
+consul_dns_config: {}
+#  enable_truncate: true
+#  udp_answer_limit: 5
+
 consul_enable_acls: true
 
 # Generated using 'uuidgen'
