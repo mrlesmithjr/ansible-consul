@@ -15,7 +15,7 @@ consul_bin_mode: '0750'
 # consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
 
 # Define interface to bind to...(eth0|eth1|enp0s8)
-consul_bind_interface: "{{ ansible_default_ipv4['interface'] }}"
+consul_bind_interface: "{{ ansible_default_ipv4['interface'] | replace('-', '_') }}"
 
 # Defines client address to listen on
 # either set to 0.0.0.0 (default) or consul_bind_address var.
