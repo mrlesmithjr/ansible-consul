@@ -101,6 +101,11 @@ consul_acl_datacenter: "{{ consul_datacenter }}"
 # consul dns queries to port 8600
 consul_enable_dnsmasq: true
 
+# Defines if Consul should log to syslog
+consul_enable_syslog: true
+# Defines Consul's log level
+consul_log_level: 'INFO'
+
 # Generate using 'consul keygen'
 # make sure to generate a new key and replace this
 # also update key if you changed the it in your cluster via 'consul keyring',

@@ -15,9 +15,9 @@
 {%   if consul_dns_config %}
 {%     set _config = config_json.update({"dns_config": consul_dns_config}) %}
 {%   endif %}
-{%     set _config = config_json.update({"enable_syslog": true}) %}
+{%     set _config = config_json.update({"enable_syslog": consul_enable_syslog }) %}
 {%     set _config = config_json.update({"encrypt": consul_encryption_key}) %}
-{%     set _config = config_json.update({"log_level": "INFO"}) %}
+{%     set _config = config_json.update({"log_level": consul_log_level}) %}
 {%     set _config = config_json.update({"node_name": consul_node_name}) %}
 {%     set _config = config_json.update({"ui": consul_ui}) %}
 {%   if inventory_hostname in groups[consul_servers_group] and inventory_hostname in play_hosts %}
