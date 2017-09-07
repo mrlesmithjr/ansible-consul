@@ -6,6 +6,14 @@
 {%     set _config = config_json.update({"acl_down_policy": consul_acl_down_policy}) %}
 {%     if inventory_hostname in groups[consul_servers_group] %}
 {%     set _config = config_json.update({"acl_master_token": consul_acl_master_token}) %}
+{%       if consul_datacenter != consul_acl_datacenter %}
+{%         if consul_enable_acl_replication %}
+{%           set _config = config_json.update({"enable_acl_replication": consul_enable_acl_replication}) %}
+{%         endif %}
+{%         if consul_acl_replication_token %}
+{%           set _config = config_json.update({"acl_replication_token": consul_acl_replication_token}) %}
+{%         endif %}
+{%       endif %}
 {%     endif %}
 {%   endif %}
 {%     set _config = config_json.update({"bind_addr": consul_bind_address}) %}
