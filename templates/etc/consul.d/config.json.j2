@@ -2,10 +2,10 @@
 {% set config_json = {} %}
 {%   if consul_enable_acls %}
 {%     set _config = config_json.update({"acl_datacenter": consul_acl_datacenter}) %}
-{%     set _config = config_json.update({"acl_default_policy": consul_acl_default_policy}) %}
 {%     set _config = config_json.update({"acl_down_policy": consul_acl_down_policy}) %}
 {%     if inventory_hostname in groups[consul_servers_group] %}
-{%     set _config = config_json.update({"acl_master_token": consul_acl_master_token}) %}
+{%       set _config = config_json.update({"acl_default_policy": consul_acl_default_policy}) %}
+{%       set _config = config_json.update({"acl_master_token": consul_acl_master_token}) %}
 {%       if consul_datacenter != consul_acl_datacenter %}
 {%         if consul_enable_acl_replication %}
 {%           set _config = config_json.update({"enable_acl_replication": consul_enable_acl_replication}) %}
