@@ -117,6 +117,10 @@ consul_acl_datacenter: "{{ consul_datacenter }}"
 #         - service: ''
 #           policy: 'write'
 
+# Defines if this role will install required Python modules on servers in consul_acl_datacenter in order to set ACLs via Ansible
+# Set to false if you wan't to install them in another way.
+consul_acl_install_requirements: true
+
 # Defines if dnsmasq should be installed and configured to resolv
 # consul dns queries to port 8600
 consul_enable_dnsmasq: true

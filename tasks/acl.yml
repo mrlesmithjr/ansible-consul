@@ -1,7 +1,22 @@
 ---
-# should get applied only against one server but role does not support
-# last rule defined wins, not all
-# requires some python packages on the target
+- name: acl | install required Python modules via package manager
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-requests
+    - python-pip
+  when: consul_acl_install_requirements
+
+- name: acl | install required Python modules via PIP
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-consul
+    - pyhcl
+  when: consul_acl_install_requirements
+
 - name: acl | deploy Consul ACL's
   consul_acl:
     host: "{{ item.0.host | default(ansible_hostname) }}"
