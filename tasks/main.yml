@@ -29,7 +29,8 @@
   tags:
     - consul-acl
   when: consul_acl is defined and
-        consul_acl
+        consul_acl and
+        consul_datacenter == consul_acl_datacenter
 
 - include: dnsmasq.yml
   when: >
