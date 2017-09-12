@@ -13,8 +13,7 @@
     token: "{{ item.0.token | default(omit) }}"
     token_type: "{{ item.0.token_type | default(omit) }}"
     validate_certs: "{{ item.0.validate_certs | default(omit) }}"
-    rules:
-      - "{{ item.1 }}"
+    rules: "{{ item.1 }}"
   with_subelements:
     - "{{ consul_acl }}"
     - rules
