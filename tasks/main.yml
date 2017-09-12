@@ -28,7 +28,8 @@
 - include: acl.yml
   tags:
     - consul-acl
-  when: consul_acl
+  when: consul_acl is defined and
+        consul_acl
 
 - include: dnsmasq.yml
   when: >
