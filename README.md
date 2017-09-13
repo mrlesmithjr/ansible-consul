@@ -88,7 +88,13 @@ consul_dns_config: {}
 #  enable_truncate: true
 #  udp_answer_limit: 5
 
+# Defines if Consul enables it's ACL functions
 consul_enable_acls: true
+# Defines if Consul will replicate it's ACLs from consul_acl_datacenter to all other consul_datacenter's
+consul_enable_acl_replication: false
+# Optional static definition of a Consul replication token
+# You may leave this empty and use the agent token API to generate a replication token
+consul_acl_replication_token: ''
 
 # Generated using 'uuidgen'
 # make sure to generate a new token and replace this one
