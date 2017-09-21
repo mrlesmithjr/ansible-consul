@@ -100,6 +100,11 @@ consul_acl_replication_token: ''
 # make sure to generate a new token and replace this one
 consul_acl_master_token: 'a5ac5cb6-c0d1-4aa3-bf9a-ca3507adc7ed'
 
+# Define the additional and optional tokens for the agent. See official documentation for details.
+consul_acl_agent_master_token: ''
+consul_acl_agent_token: ''
+consul_acl_token: ''
+
 # Defines the acl_datacenter which is authoritative for ACL information.
 consul_acl_datacenter: "{{ consul_datacenter }}"
 
