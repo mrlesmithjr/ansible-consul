@@ -108,6 +108,33 @@ consul_acl_token: ''
 # Defines the acl_datacenter which is authoritative for ACL information.
 consul_acl_datacenter: "{{ consul_datacenter }}"
 
+# Define Consul ACLs within YAML
+# To apply ACLs, consul_enable_acls needs to be true and consul_acl_datacenter needs to be set.
+# The role will apply the ACLs only in consul_acl_datacenter as they are available in the whole WAN pool.
+# The role will also apply the ACLs only against one server as this is sufficient to set ACLs globally.
+# The double dash in rules in required as the Ansible module consul_acl expects one list with additional lists in it.
+# consul_acl:
+#   - mgmt_token: '3d3ae8b5-675e-467f-9616-2f0a82552742'
+#     name: 'Foo access'
+#     token: '3cfc812f-6dc2-43f1-bceb-f10e8678f35d'
+#     rules:
+#       - - key: 'foo'
+#           policy: 'read'
+#         - key: 'private/foo'
+#           policy: 'write'
+#   - mgmt_token: "{{ variable_somewhere_else }}"
+#     name: 'Foo access 2'
+#     token: "{{ may_come_from_elsewhere_too }}"
+#     rules:
+#       - - node: 'my-node'
+#           policy: 'read'
+#         - service: ''
+#           policy: 'write'
+
+# Defines if this role will install required Python modules on servers in consul_acl_datacenter in order to set ACLs via Ansible
+# Set to false if you wan't to install them in another way.
+consul_acl_install_requirements: true
+
 # Defines if dnsmasq should be installed and configured to resolv
 # consul dns queries to port 8600
 consul_enable_dnsmasq: true

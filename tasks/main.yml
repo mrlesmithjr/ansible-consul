@@ -25,6 +25,13 @@
         consul_services is defined and
         consul_services
 
+- include: acl.yml
+  tags:
+    - consul-acl
+  when: consul_acl is defined and
+        consul_acl and
+        consul_datacenter == consul_acl_datacenter
+
 - include: dnsmasq.yml
   when: >
         consul_enable_dnsmasq is defined and
