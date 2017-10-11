@@ -159,6 +159,17 @@ consul_key_file: '/etc/consul.key'
 consul_mysql_password: 'consul'
 consul_mysql_user: 'consul'
 
+# An array of remote servers to use for retry-join-wan to join existing federation setup.
+consul_retry_join_wan: []
+# Static example
+# consul_retry_join_wan:
+#   - 266.277.288.299
+#   - 266.277.288.301
+#   - 266.277.288.302
+# Dynamic example when Ansible executing machine is running in Consul DNS aware environment
+# Note that the lookup requires dnspython on the Ansible executing machine to work
+# consul_retry_join_wan: "{{ lookup('dig', 'consul.service.nyc.consul.', wantlist=True) | ipaddr }}"
+
 # Defines the Ansible group which contains the consul server(s)
 consul_servers_group: 'consul_servers'
 
@@ -183,8 +194,6 @@ consul_version: '0.9.0'
 # Downgrades are not considered
 # Recommendation: When set to true and after raising `consul_version, consider using `--forks=1` on next Ansible run to keep Consul cluster impact low on Upgrade.
 consul_upgrade: false
-
-consul_wan_group: 'consul_wan'
 ```
 
 Dependencies
