@@ -32,4 +32,5 @@
   with_subelements:
     - "{{ consul_acl }}"
     - rules
+  no_log: true
   run_once: true
