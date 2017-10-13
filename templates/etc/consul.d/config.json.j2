@@ -54,8 +54,8 @@
 {%     set _config = config_json.update({"performance": consul_performance}) %}
 {%   endif %}
 {%     set _config = config_json.update({"retry_join": _temp_retry_join}) %}
-{%   if consul_retry_join_wan %}
-{%     set _config = config_json.update({"retry_join_wan": consul_retry_join_wan}) %}
+{%   if consul_retry_join_wan and inventory_hostname in groups[consul_servers_group] %}
+{%       set _config = config_json.update({"retry_join_wan": consul_retry_join_wan}) %}
 {%   endif %}
 {%   if consul_telemetry %}
 {%     set _config = config_json.update({"telemetry": consul_telemetry}) %}
