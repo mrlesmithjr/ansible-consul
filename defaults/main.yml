@@ -115,6 +115,8 @@ consul_mysql_password: 'consul'
 consul_mysql_user: 'consul'
 
 # An array of remote servers to use for retry-join-wan to join existing federation setup.
+# If you populate the array for all your Consul servers in one place, you may want to empty it again for your servers in the target datacenter again elsewhere.
+# Consul in the target datacenter won't complain if it's instructed to joint itself via WAN, but it might look a bit strange.
 consul_retry_join_wan: []
 # Static example
 # consul_retry_join_wan:
