@@ -56,7 +56,7 @@ consul_bin_owner: "{{ consul_user }}"
 consul_bin_group: "{{ consul_group }}"
 consul_bin_mode: '0750'
 
-# consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
+consul_bind_address: "{{ hostvars[inventory_hostname]['ansible_' + consul_bind_interface]['ipv4']['address'] }}"
 
 # Define interface to bind to...(eth0|eth1|enp0s8)
 consul_bind_interface: "{{ ansible_default_ipv4['interface'] | replace('-', '_') }}"
