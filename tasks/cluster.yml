@@ -34,3 +34,35 @@
     when: consul_encryption_key_active != consul_encryption_key
 
   when: keyring_exists.stat.exists
+
+- block:
+    - name: cluster | retrieve node ID
+      slurp:
+        src: "{{ consul_data_dir }}/node-id"
+      register: consul_node_id_b64
+      become: true
+
+    - name: cluster | Set consul_node_id fact
+      set_fact:
+        consul_node_id: "{{ consul_node_id_b64['content'] | b64decode }}"
+
+    - name: cluster | deploy peers.json_prepared
+      template:
+        src: "templates/var/consul/peers.json_prepared.j2"
+        dest: "{{ consul_peers_json_prepared_path }}/peers.json_prepared"
+        owner: "{{ consul_user }}"
+        group: "{{ consul_group }}"
+        mode: "0640"
+      become: true
+      when: not ansible_check_mode
+
+  when: consul_peers_json_prepared and
+        inventory_hostname in groups[consul_servers_group]
+
+- name: cluster | ensure absence of peers.json_prepared if desired
+  file:
+    path: "{{ consul_peers_json_prepared_path }}/peers.json_prepared"
+    state: absent
+  become: true
+  when: not consul_peers_json_prepared and
+        not ansible_check_mode

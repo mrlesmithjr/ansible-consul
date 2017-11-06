@@ -135,6 +135,12 @@ consul_acl_datacenter: "{{ consul_datacenter }}"
 # Set to false if you wan't to install them in another way.
 consul_acl_install_requirements: true
 
+# Control if role will deploy a pre-populated peers.json for outage recovery purposes.
+# Checkout the official Consul documentation on "Outage Recovery" for details.
+consul_peers_json_prepared: false
+# Path where prepared json file should get placed at
+consul_peers_json_prepared_path: "{{ consul_data_dir }}/raft"
+
 # Defines if dnsmasq should be installed and configured to resolv
 # consul dns queries to port 8600
 consul_enable_dnsmasq: true
