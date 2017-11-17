@@ -1,4 +1,3 @@
-{% if consul_cluster %}
 {% set config_json = {} %}
 {%   if consul_enable_acls %}
 {%     set _config = config_json.update({"acl_datacenter": consul_acl_datacenter}) %}
@@ -61,4 +60,3 @@
 {%     set _config = config_json.update({"telemetry": consul_telemetry}) %}
 {%   endif %}
 {{ config_json|to_nice_json }}
-{% endif %}

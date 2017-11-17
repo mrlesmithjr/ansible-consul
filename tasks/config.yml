@@ -24,11 +24,7 @@
     state: "directory"
   become: true
 
-- include: cluster.yml
-  when: consul_cluster
-
-- include: standalone.yml
-  when: not consul_cluster
+- import_tasks: cluster.yml
 
 - name: config | configuring consul
   template:

@@ -24,11 +24,6 @@ consul_client_address: '0.0.0.0'
 # Defines the name of the node inside the Consul cluster.
 consul_node_name: "{{ ansible_hostname }}"
 
-# Defines if setting up cluster (default)
-# currently does not work as only standalone but adding in ability for testing
-# purposes at a later time
-consul_cluster: true
-
 consul_config_dir: '/etc/consul.d'
 consul_config_file: '/etc/consul.conf'
 consul_data_dir: '/var/consul'
