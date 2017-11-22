@@ -42,17 +42,21 @@
 {%   else %}
 {%     set _config = config_json.update({"server": false}) %}
 {%   endif %}
+{%   if consul_retry_join %}
+{%     set _config = config_json.update({"retry_join": consul_retry_join|sort }) %}
+{%   else %}
 {%     set _temp_retry_join = [] %}
-{%   for host in groups[consul_servers_group] %}
-{%     if inventory_hostname != host %}
-{%       set _temp_ip = hostvars[host]['consul_bind_address'] %}
-{%       set _ = _temp_retry_join.append(_temp_ip) %}
-{%     endif %}
-{%   endfor %}
+{%     for host in groups[consul_servers_group] %}
+{%       if inventory_hostname != host %}
+{%         set _temp_ip = hostvars[host]['consul_bind_address'] %}
+{%         set _ = _temp_retry_join.append(_temp_ip) %}
+{%       endif %}
+{%     endfor %}
+{%     set _config = config_json.update({"retry_join": _temp_retry_join}) %}
+{%   endif %}
 {%   if consul_performance %}
 {%     set _config = config_json.update({"performance": consul_performance}) %}
 {%   endif %}
-{%     set _config = config_json.update({"retry_join": _temp_retry_join}) %}
 {%   if consul_retry_join_wan and inventory_hostname in groups[consul_servers_group] %}
 {%     set _config = config_json.update({"retry_join_wan": consul_retry_join_wan|sort}) %}
 {%   endif %}

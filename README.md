@@ -159,6 +159,11 @@ consul_runas_user: true
 consul_mysql_password: 'consul'
 consul_mysql_user: 'consul'
 
+# An array of servers to use for retry-join to join existing cluster. # See official documentation of `-retry-join` for possible use cases.
+# If empty, the role will populate the array with the IP addresses from hosts in `consul_servers_group` which need to be part of the play.
+# Thus defining values here act as an override of the auto population and allows more fine grained plays with out servers in it.
+consul_retry_join: []
+
 # An array of remote servers to use for retry-join-wan to join existing federation setup.
 # If you populate the array for all your Consul servers in one place, you may want to empty it again for your servers in the target datacenter again elsewhere.
 # Consul in the target datacenter won't complain if it's instructed to joint itself via WAN, but it might look a bit strange.
