@@ -36,4 +36,4 @@
     - 'jq'
     - 'tree'
     - 'unzip'
-  when: ansible_distribution == "Fedora"
+  when: ansible_distribution != "Fedora"
