@@ -20,6 +20,8 @@ platforms:
     #   - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    groups:
+      - consul_servers
 provisioner:
   name: ansible
   playbooks:
