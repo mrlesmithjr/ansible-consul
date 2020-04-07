@@ -31,7 +31,7 @@
   when: not ansible_check_mode
 
 # This ensures that configurations are in place prior to configuring app_services
-- name: services | restarting consul if re-configured
+- name: services | restarting consul if re-configured # noqa 503
   service:
     name: consul
     state: restarted
@@ -40,7 +40,7 @@
     consul_reconfigured['changed'] and
     not ansible_check_mode
 
-- name: services | checking to ensure consul agent is listening
+- name: services | checking to ensure consul agent is listening # noqa 503
   wait_for:
     port: 8500
     delay: 10

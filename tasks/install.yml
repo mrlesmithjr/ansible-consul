@@ -6,14 +6,14 @@
   ignore_errors: true
   become: true
 
-- name: install | try to determine current consul version
+- name: install | try to determine current consul version # noqa 306
   shell: "{{ consul_bin_path + '/consul version' }} | head -1 | cut -d 'v' -f2"
   register: consul_version_installed
   changed_when: false
   when: consul_upgrade and
     consul_binary_exists.stat.exists
 
-- name: install | backup current binary as fallback
+- name: install | backup current binary as fallback # noqa 305
   shell: "mv {{ consul_bin_path + '/consul' }} {{ consul_bin_path + '/consul_backup' }}"
   register: consul_binary_backup
   become: true
@@ -38,7 +38,7 @@
     - restart consul
   when: not ansible_check_mode
 
-- name: install | restoring former binary as upgrade failed
+- name: install | restoring former binary as upgrade failed # noqa 305
   shell: "mv {{ consul_bin_path + '/consul_backup' }} {{ consul_bin_path + '/consul' }}"
   become: true
   register: consul_binary_restore
