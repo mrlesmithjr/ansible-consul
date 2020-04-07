@@ -6,21 +6,23 @@
   ignore_errors: true
   become: true
 
-- name: install | try to determine current consul version
+- name: install | try to determine current consul version # noqa 306
   shell: "{{ consul_bin_path + '/consul version' }} | head -1 | cut -d 'v' -f2"
   register: consul_version_installed
   changed_when: false
-  when: consul_upgrade and
-    consul_binary_exists.stat.exists
+  when:
+    - consul_upgrade|bool
+    - consul_binary_exists.stat.exists
 
-- name: install | backup current binary as fallback
+- name: install | backup current binary as fallback # noqa 305
   shell: "mv {{ consul_bin_path + '/consul' }} {{ consul_bin_path + '/consul_backup' }}"
   register: consul_binary_backup
   become: true
-  when: consul_upgrade and
-    consul_binary_exists.stat.exists and
-    consul_version_installed.stdout < consul_version and
-    not ansible_check_mode
+  when:
+    - consul_upgrade|bool
+    - consul_binary_exists.stat.exists
+    - consul_version_installed.stdout < consul_version
+    - not ansible_check_mode
 
 - name: install | download and extract consul
   unarchive:
@@ -38,21 +40,22 @@
     - restart consul
   when: not ansible_check_mode
 
-- name: install | restoring former binary as upgrade failed
+- name: install | restoring former binary as upgrade failed # noqa 305
   shell: "mv {{ consul_bin_path + '/consul_backup' }} {{ consul_bin_path + '/consul' }}"
   become: true
   register: consul_binary_restore
   notify:
     - restart consul
-  when: consul_download_extract|failed and
-    consul_binary_backup|success and
-    not ansible_check_mode
+  when:
+    - consul_download_extract is failed
+    - consul_binary_backup is successful
+    - not ansible_check_mode
 
 - name: install | remove not required binary backup
   file:
     path: "{{ consul_bin_path + '/consul_backup' }}"
     state: absent
-  when: consul_download_extract|success
+  when: consul_download_extract is successful
 
 - name: install | ensure binary ownership and mode
   file:

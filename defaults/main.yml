@@ -31,8 +31,8 @@ consul_data_dir: /var/consul
 # Defines datacenter name for Consul
 consul_datacenter: dc1
 
-consul_dl_file: "{{ 'consul_' + consul_version + '_linux_amd64.zip' }}"
-consul_dl_url: "{{ 'https://releases.hashicorp.com/consul/' + consul_version }}"
+consul_dl_file: "{{ 'consul_' + consul_version|string + '_linux_amd64.zip' }}"
+consul_dl_url: "{{ 'https://releases.hashicorp.com/consul/' + consul_version|string }}"
 
 # Set dns_config options for Consul. See official documentation for all options possible.
 consul_dns_config: {}
@@ -94,7 +94,7 @@ consul_peers_json_prepared_path: "{{ consul_data_dir + '/raft' }}"
 
 # Defines if dnsmasq should be installed and configured to resolv
 # consul dns queries to port 8600
-consul_enable_dnsmasq: true
+consul_enable_dnsmasq: false
 
 # Defines if Consul should log to syslog
 consul_enable_syslog: true
@@ -150,7 +150,7 @@ consul_telemetry: {}
 #   disable_hostname: true
 
 consul_ui: false
-consul_version: "1.4.0"
+consul_version: 1.7.2
 
 # Defines if role upgrades consul binary on servers to consul_version
 # Downgrades are not considered
