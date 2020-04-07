@@ -1,3 +1,15 @@
+commit d9472068496b421aa1eef3ed2e05c3a94b4d4b7f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Tue Apr 7 16:30:09 2020 -0400
+
+    Added Consul group for testing
+
+commit beeefd6a5f794e29e13b9dacc66a53975d800f95
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Tue Apr 7 16:08:19 2020 -0400
+
+    Fixed linting issues
+
 commit 3042853ed573dd8322a2a73dca7f28ce0d999437
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Tue Apr 7 15:51:16 2020 -0400
