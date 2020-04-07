@@ -150,7 +150,7 @@ consul_telemetry: {}
 #   disable_hostname: true
 
 consul_ui: false
-consul_version: 1.4.0
+consul_version: 1.7.2
 
 # Defines if role upgrades consul binary on servers to consul_version
 # Downgrades are not considered

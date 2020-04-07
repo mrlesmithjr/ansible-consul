@@ -1,3 +1,9 @@
+commit b8eb5eaf88a2c068072469b9300af0e91858e70b
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Tue Apr 7 16:30:55 2020 -0400
+
+    Fixed conditionals, etc. from failed tests
+
 commit d9472068496b421aa1eef3ed2e05c3a94b4d4b7f
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Tue Apr 7 16:30:09 2020 -0400
