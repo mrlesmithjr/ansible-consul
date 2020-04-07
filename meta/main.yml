@@ -1,9 +1,10 @@
 ---
 galaxy_info:
   author: Larry Smith Jr.
-  description: An Ansible role to install, configure and build a Consul cluster.
+  description: Ansible role to install/configure Consul
   license: MIT
-  min_ansible_version: 1.2
+  min_ansible_version: 2.8
+
   platforms:
     - name: EL
       versions:
@@ -29,4 +30,5 @@ galaxy_info:
   galaxy_tags:
     - clustering
     - system
+
 dependencies: []
