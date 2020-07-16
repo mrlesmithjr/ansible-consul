@@ -32,6 +32,6 @@
     validate_certs: "{{ item.0.validate_certs | default(omit) }}"
     rules: "{{ item.1 }}"
   become: true
-  loop: "{{ lookup('subelements', consul_acl, 'rules', {'skip_missing': True}) }}"
+  loop: "{{ consul_acl|subelements('rules') }}"
   no_log: true
   run_once: true

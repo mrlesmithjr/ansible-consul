@@ -49,23 +49,24 @@ consul_config_dir: /etc/consul.d
 # The role will apply the ACLs only in consul_acl_datacenter as they are available in the whole WAN pool.
 # The role will also apply the ACLs only against one server as this is sufficient to set ACLs globally.
 # The double dash in rules in required as the Ansible module consul_acl expects one list with additional lists in it.
-# consul_acl:
-#   - mgmt_token: 3d3ae8b5-675e-467f-9616-2f0a82552742
-#     name: Foo access
-#     token: 3cfc812f-6dc2-43f1-bceb-f10e8678f35d
-#     rules:
-#       - - key: foo
-#           policy: read
-#         - key: private/foo
-#           policy: write
-#   - mgmt_token: "{{ variable_somewhere_else }}"
-#     name: Foo access 2
-#     token: "{{ may_come_from_elsewhere_too }}"
-#     rules:
-#       - - node: my-node
-#           policy: read
-#         - service: ""
-#           policy: write
+consul_acl:
+  []
+  # - mgmt_token: 3d3ae8b5-675e-467f-9616-2f0a82552742
+  #   name: Foo access
+  #   token: 3cfc812f-6dc2-43f1-bceb-f10e8678f35d
+  #   rules:
+  #     - - key: foo
+  #         policy: read
+  #       - key: private/foo
+  #         policy: write
+  # - mgmt_token: "{{ variable_somewhere_else }}"
+  #   name: Foo access 2
+  #   token: "{{ may_come_from_elsewhere_too }}"
+  #   rules:
+  #     - - node: my-node
+  #         policy: read
+  #       - service: ""
+  #         policy: write
 
 # Control if role will deploy a pre-populated peers.json for outage recovery purposes.
 # Checkout the official Consul documentation on "Outage Recovery" for details.

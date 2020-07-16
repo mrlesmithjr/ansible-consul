@@ -1,3 +1,87 @@
+commit 9e41616c432e9b2b8b59c6539a2a463e6de50269
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:40:41 2020 -0400
+
+    Cleaned up loops
+    
+    - Changed with_items to loop
+    - Changed with_subelements to loop
+
+commit c74c03b43df7276f1c70f4504562e9ab84d94c98
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:36:36 2020 -0400
+
+    Cleaned up formatting of pip installs
+
+commit 2b8f9c0308f18c04c0b862ccf1f2d1cf658d9058
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:31:15 2020 -0400
+
+    Removed tags
+    
+    Need to minimize the usage of tags until absolutely needed
+
+commit 016a4af848f09478436daf495709f78b6f5f9b83
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:30:11 2020 -0400
+
+    Simplified Consul install task(s)
+
+commit fcc0b1c3192a9f906ac6d1d937f7768e1de6c29d
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:29:37 2020 -0400
+
+    Removed set_facts tasks
+
+commit c48906a6163911de3a0154127975a3091f934a5e
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:28:50 2020 -0400
+
+    Cleaned up package installs
+    
+    - Consolidated where applicable
+    - Cleaned up formatting where applicable
+
+commit 5fc083a6e93247662a7126a782643db5dbb89bd7
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:27:48 2020 -0400
+
+    Tightened up Consul user account
+
+commit b4b7b56e7d1f8e5070112c0650803f2e5c3041fc
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:27:26 2020 -0400
+
+    Cleaned up when conditions
+    
+    The previous conditions needed to be cleaned up badly.
+    We need to ensure our conditionals are as simple as possible.
+
+commit 241b6a337e7f5a1226160dae474567e18ef9accc
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:10:02 2020 -0400
+
+    Updated Python requirements
+    
+    Updated Python requirements for testing, etc. including Molecule
+
+commit 8d450cee7714d25c2156fb3912a2d28fcaa70369
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:09:00 2020 -0400
+
+    First major variable refactoring
+    
+    Switching to a consolidated configuration option which is converted to JSON
+    This brings the configuration of Consul in sync with our other Hashi roles
+
+commit d9cf9f48a3e5edc374b109cecbc3034768f56fcd
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 14:42:34 2020 -0400
+
+    Added Apt cache update for Debian
+    
+    Need to ensure that all package info is up to date
+
 commit bb7d905c894b6c76218be14c4f9904745e9e2b3f
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 14:15:05 2020 -0400
