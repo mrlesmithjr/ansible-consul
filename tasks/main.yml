@@ -16,15 +16,11 @@
 - import_tasks: services.yml
 
 - import_tasks: app_services.yml
-  tags:
-    - consul-app-services
   when:
     - consul_services is defined
     - consul_services
 
 - import_tasks: acl.yml
-  tags:
-    - consul-acl
   when:
     - consul_acl is defined
     - consul_configuration.datacenter == consul_configuration.primary_datacenter
