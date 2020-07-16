@@ -23,14 +23,12 @@
     - consul_binary_exists.stat.exists
     - consul_version_installed.stdout < consul_version
 
-- name: install | download and extract consul
+- name: install | Installing HashiCorp Consul
   unarchive:
-    src: "{{ consul_dl_url + '/' + consul_dl_file }}"
-    dest: "{{ consul_bin_path }}"
-    remote_src: True
     creates: "{{ consul_bin_path + '/consul' }}"
     dest: "{{ consul_bin_path+'/' }}"
     group: "{{ consul_user_info.group }}"
+    mode: u=rwx,g=rx,o=rx
     owner: "{{ consul_user_info.user }}"
     remote_src: true
     src: "{{ 'https://releases.hashicorp.com/consul/'+consul_version|string+'/consul_'+consul_version|string+'_linux_amd64.zip' }}"
