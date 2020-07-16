@@ -9,6 +9,9 @@
 # We create the consul user and add it to the consul group
 - name: accounts | creating consul user
   user:
+    createhome: false
     group: "{{ consul_user_info.group }}"
     name: "{{ consul_user_info.user }}"
+    shell: /bin/false
+    system: true
   become: true
