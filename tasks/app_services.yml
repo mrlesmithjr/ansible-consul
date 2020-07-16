@@ -1,7 +1,9 @@
 ---
 - name: app_services | installing pre-reqs
   apt:
-    name: ["python-dev", "python-pip"]
+    name:
+      - python-dev
+      - python-pip
     state: present
   become: true
   register: result
@@ -10,7 +12,8 @@
 
 - name: app_services | installing python modules
   pip:
-    name: ["python-consul"]
+    name:
+      - python-consul
     state: present
   become: true
   register: result
