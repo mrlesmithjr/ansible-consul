@@ -1,8 +1,5 @@
 ---
 # tasks file for ansible-consul
-- import_tasks: set_facts.yml
-  tags:
-    - consul_facts
 
 - import_tasks: debian.yml
   when: ansible_os_family == "Debian"
