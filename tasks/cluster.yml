@@ -2,7 +2,7 @@
 # Check if a local keyring file is present
 - name: cluster | Check if node has already been bootstrapped
   stat:
-    path: "{{ consul_data_dir + '/serf/local.keyring' }}"
+    path: "{{ consul_configuration.data_dir + '/serf/local.keyring' }}"
   register: keyring_exists
   ignore_errors: true
   become: true
@@ -11,7 +11,7 @@
     # Gather the currently used encryption key of the cluster
     - name: cluster | Fetch active encryption key
       slurp:
-        src: "{{ consul_data_dir + '/serf/local.keyring' }}"
+        src: "{{ consul_configuration.data_dir + '/serf/local.keyring' }}"
       register: keyring_value
       become: true
 
@@ -27,18 +27,18 @@
       fail:
         msg: >
           "ATTENTION: This node uses another encryption key then defined in consul_encryption_key!
-          The active key can be found locally in {{ consul_data_dir }}/serf/local.keyring"
+          The active key can be found locally in {{ consul_configuration.data_dir }}/serf/local.keyring"
           Update the variable consul_encryption_key!
           Removing node from play.
       become: true
-      when: consul_encryption_key_active != consul_encryption_key
+      when: consul_encryption_key_active != consul_configuration.encrypt
 
   when: keyring_exists.stat.exists
 
 - block:
     - name: cluster | retrieve node ID
       slurp:
-        src: "{{ consul_data_dir + '/node-id' }}"
+        src: "{{ consul_configuration.data_dir + '/node-id' }}"
       register: consul_node_id_b64
       become: true
 
@@ -50,8 +50,8 @@
       template:
         src: templates/var/consul/peers.json_prepared.j2
         dest: "{{ consul_peers_json_prepared_path + '/peers.json_prepared' }}"
-        owner: "{{ consul_user }}"
-        group: "{{ consul_group }}"
+        owner: "{{ consul_user_info.user }}"
+        group: "{{ consul_user_info.group }}"
         mode: "0640"
       become: true
       when: not ansible_check_mode

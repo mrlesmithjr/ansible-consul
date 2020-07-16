@@ -30,11 +30,12 @@
     dest: "{{ consul_bin_path }}"
     remote_src: True
     creates: "{{ consul_bin_path + '/consul' }}"
-    owner: "{{ consul_bin_owner }}"
-    group: "{{ consul_bin_group }}"
-    mode: "{{ consul_bin_mode }}"
+    dest: "{{ consul_bin_path+'/' }}"
+    group: "{{ consul_user_info.group }}"
+    owner: "{{ consul_user_info.user }}"
+    remote_src: true
+    src: "{{ 'https://releases.hashicorp.com/consul/'+consul_version|string+'/consul_'+consul_version|string+'_linux_amd64.zip' }}"
   become: true
-  ignore_errors: true
   register: consul_download_extract
   notify:
     - restart consul

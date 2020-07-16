@@ -15,9 +15,9 @@
 # We create the consul data folder
 - name: config | creating consul data folder
   file:
-    path: "{{ consul_data_dir }}"
-    owner: "{{ consul_user }}"
-    group: "{{ consul_group }}"
+    path: "{{ consul_configuration.data_dir }}"
+    owner: "{{ consul_user_info.user }}"
+    group: "{{ consul_user_info.group }}"
     recurse: yes
     state: directory
   become: true
