@@ -6,7 +6,6 @@
   become: true
   register: result
   until: result is successful
-  when: consul_acl_install_requirements
 
 - name: acl | install required Python modules via PIP
   pip:
@@ -15,7 +14,6 @@
   become: true
   register: result
   until: result is successful
-  when: consul_acl_install_requirements
 
 - name: acl | deploy Consul ACL's
   consul_acl:

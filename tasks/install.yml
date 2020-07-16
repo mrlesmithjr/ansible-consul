@@ -22,7 +22,6 @@
     - consul_upgrade|bool
     - consul_binary_exists.stat.exists
     - consul_version_installed.stdout < consul_version
-    - not ansible_check_mode
 
 - name: install | download and extract consul
   unarchive:
@@ -39,7 +38,6 @@
   register: consul_download_extract
   notify:
     - restart consul
-  when: not ansible_check_mode
 
 - name: install | restoring former binary as upgrade failed # noqa 305
   shell: "mv {{ consul_bin_path + '/consul_backup' }} {{ consul_bin_path + '/consul' }}"
@@ -50,21 +48,9 @@
   when:
     - consul_download_extract is failed
     - consul_binary_backup is successful
-    - not ansible_check_mode
 
 - name: install | remove not required binary backup
   file:
     path: "{{ consul_bin_path + '/consul_backup' }}"
     state: absent
   when: consul_download_extract is successful
-
-- name: install | ensure binary ownership and mode
-  file:
-    path: "{{ consul_bin_path + '/consul' }}"
-    owner: "{{ consul_bin_owner }}"
-    group: "{{ consul_bin_group }}"
-    mode: "{{ consul_bin_mode }}"
-  become: true
-  notify:
-    - restart consul
-  when: not ansible_check_mode

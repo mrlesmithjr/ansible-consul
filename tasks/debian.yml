@@ -17,6 +17,5 @@
     name: ["dnsutils"]
     state: present
   become: true
-  when: ansible_distribution == "Debian"
   register: result
   until: result is successful
