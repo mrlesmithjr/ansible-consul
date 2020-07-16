@@ -1,3 +1,9 @@
+commit bb7d905c894b6c76218be14c4f9904745e9e2b3f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 14:15:05 2020 -0400
+
+    Changed logic for consul_bind_address
+
 commit 75c31d51dd3c0c68b77999c8cfa4dc0206efb4aa
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 13:34:12 2020 -0400

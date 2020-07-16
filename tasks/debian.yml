@@ -1,4 +1,9 @@
 ---
+- name: debian | Updating Apt Cache
+  apt:
+    update_cache: true
+  become: true
+
 - name: debian | installing dependencies
   apt:
     name: ["jq", "tree", "unzip", "uuid-runtime"]
