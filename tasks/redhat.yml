@@ -18,8 +18,11 @@
   when: ansible_distribution != "Fedora"
 
 - name: redhat | installing add'l dependencies (Fedora)
-  dnf:
-    name: ["jq", "tree", "unzip"]
+  package:
+    name:
+      - jq
+      - tree
+      - unzip
     state: present
   become: true
   register: result

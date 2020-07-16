@@ -1,34 +1,11 @@
 ---
-- name: dnsmasq | installing dnsmasq (Debian)
-  apt:
+- name: dnsmasq | installing dnsmasq
+  package:
     name: dnsmasq
     state: present
   become: true
   register: result
   until: result is successful
-  when: ansible_os_family == "Debian"
-
-- name: dnsmasq | installing dnsmasq (Fedora)
-  dnf:
-    name: dnsmasq
-    state: present
-  become: true
-  register: result
-  until: result is successful
-  when: >
-    ansible_os_family == "RedHat" and
-    ansible_distribution == "Fedora"
-
-- name: dnsmasq | installing dnsmasq (RedHat, but not Fedora)
-  yum:
-    name: dnsmasq
-    state: present
-  become: true
-  register: result
-  until: result is successful
-  when: >
-    ansible_os_family == "RedHat" and
-    ansible_distribution != "Fedora"
 
 - name: dnsmasq | ensuring dnsmasq service is enabled
   service:

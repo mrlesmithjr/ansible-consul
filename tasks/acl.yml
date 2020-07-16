@@ -1,7 +1,9 @@
 ---
 - name: acl | install required Python modules via package manager
   package:
-    name: ["python-requests", "python-pip"]
+    name:
+      - python-requests
+      - python-pip
     state: present
   become: true
   register: result
@@ -9,7 +11,9 @@
 
 - name: acl | install required Python modules via PIP
   pip:
-    name: ["python-consul", "pyhcl"]
+    name:
+      - python-consul
+      - pyhcl
     state: present
   become: true
   register: result

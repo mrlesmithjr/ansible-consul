@@ -6,15 +6,12 @@
 
 - name: debian | installing dependencies
   apt:
-    name: ["jq", "tree", "unzip", "uuid-runtime"]
-    state: present
-  become: true
-  register: result
-  until: result is successful
-
-- name: debian | installing add'l dependencies (Debian)
-  apt:
-    name: ["dnsutils"]
+    name:
+      - dnsutils
+      - jq
+      - tree
+      - unzip
+      - uuid-runtime
     state: present
   become: true
   register: result
