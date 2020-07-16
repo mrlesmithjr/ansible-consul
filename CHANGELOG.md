@@ -1,3 +1,15 @@
+commit 75c31d51dd3c0c68b77999c8cfa4dc0206efb4aa
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 13:34:12 2020 -0400
+
+    Cleaned up unused handlers
+
+commit edcf0decb386e4d67541578f8dfc4519d65f0b31
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Tue Apr 7 16:47:02 2020 -0400
+
+    Upgraded Consul version to latest
+
 commit b8eb5eaf88a2c068072469b9300af0e91858e70b
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Tue Apr 7 16:30:55 2020 -0400
