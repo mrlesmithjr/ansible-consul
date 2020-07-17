@@ -81,10 +81,6 @@ consul_enable_dnsmasq: false
 # Defines the Ansible group which contains the consul server(s)
 consul_servers_group: consul_servers
 
-# Define services to register and checks to ensure those services
-# are running on clients. See playbook.yml for examples.
-consul_services: []
-
 # Defines if role upgrades consul binary on servers to consul_version
 # Downgrades are not considered
 # Recommendation: When set to true and after raising `consul_version, consider using `--forks=1` on next Ansible run to keep Consul cluster impact low on Upgrade.

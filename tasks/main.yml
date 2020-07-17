@@ -15,11 +15,6 @@
 
 - import_tasks: services.yml
 
-- import_tasks: app_services.yml
-  when:
-    - consul_services is defined
-    - consul_services
-
 - import_tasks: acl.yml
   when:
     - consul_acl is defined
