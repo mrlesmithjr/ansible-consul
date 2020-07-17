@@ -1,21 +1,14 @@
 ---
-- name: acl | install required Python modules via package manager
-  package:
-    name: ["python-requests", "python-pip"]
-    state: present
-  become: true
-  register: result
-  until: result is successful
-  when: consul_acl_install_requirements
-
 - name: acl | install required Python modules via PIP
   pip:
-    name: ["python-consul", "pyhcl"]
+    executable: pip3
+    name:
+      - python-consul
+      - pyhcl
     state: present
   become: true
   register: result
   until: result is successful
-  when: consul_acl_install_requirements
 
 - name: acl | deploy Consul ACL's
   consul_acl:
@@ -30,8 +23,6 @@
     validate_certs: "{{ item.0.validate_certs | default(omit) }}"
     rules: "{{ item.1 }}"
   become: true
-  with_subelements:
-    - "{{ consul_acl }}"
-    - rules
+  loop: "{{ consul_acl|subelements('rules') }}"
   no_log: true
   run_once: true

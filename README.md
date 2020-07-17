@@ -1,6 +1,10 @@
 # ansible-consul
 
-Ansible role to install/configure Consul
+Ansible role to install/configure Consul server
+
+> NOTE: If you are looking for installing/configure Consul client, then head
+> over to [ansible-consul-client](https://github.com/mrlesmithjr/ansible-consul-client). This `ansible-consul`
+> role will begin to have client functionality removed over time.
 
 ## Build Status
 

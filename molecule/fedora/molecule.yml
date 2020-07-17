@@ -1,7 +1,7 @@
 ---
 dependency:
   name: galaxy
-  enabled: false
+  enabled: true
   options:
     role-file: requirements.yml
 driver:
@@ -26,5 +26,6 @@ provisioner:
   name: ansible
   playbooks:
     converge: ../shared/converge.yml
+    prepare: ../shared/prepare.yml
 verifier:
   name: ansible

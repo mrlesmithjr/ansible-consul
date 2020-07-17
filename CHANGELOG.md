@@ -1,3 +1,239 @@
+commit 9c27eafdde0d5fb673e9c512c7d374afa28ad51f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 09:16:28 2020 -0400
+
+    Added Apt cache_valid_time back
+
+commit 7031c395ff623a8e2246ebe6fd5162143c66ca54
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 02:08:47 2020 -0400
+
+    Added bootstrap-python role as requirement
+    
+    This should solve Python requirements issues
+
+commit 22a2f9357febeadcff2c70800dffb38e670d3436
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 02:08:08 2020 -0400
+
+    removed unused requirements
+    
+    This is used from repo root so these are not needed
+
+commit b001d632ec240680bd76b38074894af9ca2a4bd0
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 01:19:55 2020 -0400
+
+    Updated Galaxy platforms
+
+commit 636f768953f10b30907c6169ef2e402283c369f3
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 01:18:17 2020 -0400
+
+    Disabled CI testing for Ubuntu1604
+    
+    Idempotency fails on apt cache update same as Debian8
+
+commit df9480881f5454782414ab3e46eef26baad06e8c
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 00:53:56 2020 -0400
+
+    Trying to fix CentOS7 Python Packages
+
+commit 954daa7270ba2a2abb52ffe075f7bd129bf80c09
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 00:29:54 2020 -0400
+
+    Changing package pre-reqs to simplify
+    
+    Will troubleshoot after failures
+
+commit d40831955c93ff2116f251f410d4ff0eceb3fe54
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 00:16:32 2020 -0400
+
+    Fixing CentOS7 Python Packages
+
+commit 9a63a367c807538d3382ad5acb8ecd5384725560
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:56:14 2020 -0400
+
+    Fixed Python packages for RedHat
+
+commit 62a862dceffe8cb633de5be7a1bef1ef8c271d33
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:33:51 2020 -0400
+
+    Added missing consul_servers group for Molecule Ubuntu2004
+
+commit ee89255f1eee6b4693f6922e55b08b4efb3bd6fc
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:19:01 2020 -0400
+
+    Updated to latest Cookiecutter template
+
+commit f1f8fdc1bda4492d70d3d877914cd98b1b37e2ec
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:49:10 2020 -0400
+
+    Updated info about new Consul client role
+
+commit 7570df7eb7f9e21ce23ded5e5dc8a35e47fcf58a
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:29:06 2020 -0400
+
+    Testing different Travis tests
+
+commit 5dad21c3102a422ad2a12a5075e77be40617509f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:12:59 2020 -0400
+
+    Adding Python requirements back to workflow
+
+commit 67a76e4fdee64e440bb3122ea04b7b566e9fa29c
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:08:59 2020 -0400
+
+    Testing another way for Actions
+
+commit 5a905a18e50bd8904c1182766859b81a5f3c21a3
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:06:50 2020 -0400
+
+    Testing different GitHub Actions workflow
+
+commit 97d0340a933e41f13368e588037c3977a1429e40
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 21:42:46 2020 -0400
+
+    Fixed Python package installs
+    
+    Need to ensure we are installing Python3 packages and setuptools
+
+commit c61b509e45fe1978eb458d8dbf616a58841e7833
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 20:32:12 2020 -0400
+
+    Removed client services functionality
+    
+    This functionality will be moving to https://github.com/mrlesmithjr/ansible-consul-client
+
+commit 2d3c27ba3129c391c56ed83b2d255a510619fde3
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 20:04:27 2020 -0400
+
+    Updated CI tests to most current
+
+commit 067f75426c83b08ed419700af90155eae3a8c9a5
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:55:35 2020 -0400
+
+    Fixed issue with consul_acl loop
+    
+    New loop|subelements causing issues with previous definitions
+
+commit 9e41616c432e9b2b8b59c6539a2a463e6de50269
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:40:41 2020 -0400
+
+    Cleaned up loops
+    
+    - Changed with_items to loop
+    - Changed with_subelements to loop
+
+commit c74c03b43df7276f1c70f4504562e9ab84d94c98
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:36:36 2020 -0400
+
+    Cleaned up formatting of pip installs
+
+commit 2b8f9c0308f18c04c0b862ccf1f2d1cf658d9058
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:31:15 2020 -0400
+
+    Removed tags
+    
+    Need to minimize the usage of tags until absolutely needed
+
+commit 016a4af848f09478436daf495709f78b6f5f9b83
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:30:11 2020 -0400
+
+    Simplified Consul install task(s)
+
+commit fcc0b1c3192a9f906ac6d1d937f7768e1de6c29d
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:29:37 2020 -0400
+
+    Removed set_facts tasks
+
+commit c48906a6163911de3a0154127975a3091f934a5e
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:28:50 2020 -0400
+
+    Cleaned up package installs
+    
+    - Consolidated where applicable
+    - Cleaned up formatting where applicable
+
+commit 5fc083a6e93247662a7126a782643db5dbb89bd7
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:27:48 2020 -0400
+
+    Tightened up Consul user account
+
+commit b4b7b56e7d1f8e5070112c0650803f2e5c3041fc
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:27:26 2020 -0400
+
+    Cleaned up when conditions
+    
+    The previous conditions needed to be cleaned up badly.
+    We need to ensure our conditionals are as simple as possible.
+
+commit 241b6a337e7f5a1226160dae474567e18ef9accc
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:10:02 2020 -0400
+
+    Updated Python requirements
+    
+    Updated Python requirements for testing, etc. including Molecule
+
+commit 8d450cee7714d25c2156fb3912a2d28fcaa70369
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:09:00 2020 -0400
+
+    First major variable refactoring
+    
+    Switching to a consolidated configuration option which is converted to JSON
+    This brings the configuration of Consul in sync with our other Hashi roles
+
+commit d9cf9f48a3e5edc374b109cecbc3034768f56fcd
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 14:42:34 2020 -0400
+
+    Added Apt cache update for Debian
+    
+    Need to ensure that all package info is up to date
+
+commit bb7d905c894b6c76218be14c4f9904745e9e2b3f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 14:15:05 2020 -0400
+
+    Changed logic for consul_bind_address
+
+commit 75c31d51dd3c0c68b77999c8cfa4dc0206efb4aa
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 13:34:12 2020 -0400
+
+    Cleaned up unused handlers
+
+commit edcf0decb386e4d67541578f8dfc4519d65f0b31
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Tue Apr 7 16:47:02 2020 -0400
+
+    Upgraded Consul version to latest
+
 commit b8eb5eaf88a2c068072469b9300af0e91858e70b
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Tue Apr 7 16:30:55 2020 -0400
