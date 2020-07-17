@@ -1,3 +1,47 @@
+commit ee89255f1eee6b4693f6922e55b08b4efb3bd6fc
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:19:01 2020 -0400
+
+    Updated to latest Cookiecutter template
+
+commit f1f8fdc1bda4492d70d3d877914cd98b1b37e2ec
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:49:10 2020 -0400
+
+    Updated info about new Consul client role
+
+commit 7570df7eb7f9e21ce23ded5e5dc8a35e47fcf58a
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:29:06 2020 -0400
+
+    Testing different Travis tests
+
+commit 5dad21c3102a422ad2a12a5075e77be40617509f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:12:59 2020 -0400
+
+    Adding Python requirements back to workflow
+
+commit 67a76e4fdee64e440bb3122ea04b7b566e9fa29c
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:08:59 2020 -0400
+
+    Testing another way for Actions
+
+commit 5a905a18e50bd8904c1182766859b81a5f3c21a3
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:06:50 2020 -0400
+
+    Testing different GitHub Actions workflow
+
+commit 97d0340a933e41f13368e588037c3977a1429e40
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 21:42:46 2020 -0400
+
+    Fixed Python package installs
+    
+    Need to ensure we are installing Python3 packages and setuptools
+
 commit c61b509e45fe1978eb458d8dbf616a58841e7833
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 20:32:12 2020 -0400
