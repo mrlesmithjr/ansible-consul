@@ -2,8 +2,9 @@
 - name: acl | install required Python modules via package manager
   package:
     name:
-      - python-requests
-      - python-pip
+      - python3-requests
+      - python3-pip
+      - python3-setuptools
     state: present
   become: true
   register: result
@@ -11,6 +12,7 @@
 
 - name: acl | install required Python modules via PIP
   pip:
+    executable: pip3
     name:
       - python-consul
       - pyhcl

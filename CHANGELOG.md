@@ -1,3 +1,17 @@
+commit c61b509e45fe1978eb458d8dbf616a58841e7833
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 20:32:12 2020 -0400
+
+    Removed client services functionality
+    
+    This functionality will be moving to https://github.com/mrlesmithjr/ansible-consul-client
+
+commit 2d3c27ba3129c391c56ed83b2d255a510619fde3
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 20:04:27 2020 -0400
+
+    Updated CI tests to most current
+
 commit 067f75426c83b08ed419700af90155eae3a8c9a5
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:55:35 2020 -0400
