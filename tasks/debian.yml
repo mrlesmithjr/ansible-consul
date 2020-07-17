@@ -2,6 +2,7 @@
 - name: debian | Updating Apt Cache
   apt:
     update_cache: true
+    cache_valid_time: 3600
   become: true
 
 - name: debian | installing dependencies
