@@ -1,3 +1,9 @@
+commit 62a862dceffe8cb633de5be7a1bef1ef8c271d33
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:33:51 2020 -0400
+
+    Added missing consul_servers group for Molecule Ubuntu2004
+
 commit ee89255f1eee6b4693f6922e55b08b4efb3bd6fc
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 23:19:01 2020 -0400

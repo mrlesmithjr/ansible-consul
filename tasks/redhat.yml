@@ -10,7 +10,9 @@
 
 - name: redhat | installing dependencies
   yum:
-    name: ["python-devel", "python-pip"]
+    name:
+      - python3-devel
+      - python3-pip
     state: present
   become: true
   register: result
