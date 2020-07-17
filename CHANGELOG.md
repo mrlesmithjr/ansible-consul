@@ -1,3 +1,25 @@
+commit 22a2f9357febeadcff2c70800dffb38e670d3436
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 02:08:08 2020 -0400
+
+    removed unused requirements
+    
+    This is used from repo root so these are not needed
+
+commit b001d632ec240680bd76b38074894af9ca2a4bd0
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 01:19:55 2020 -0400
+
+    Updated Galaxy platforms
+
+commit 636f768953f10b30907c6169ef2e402283c369f3
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 01:18:17 2020 -0400
+
+    Disabled CI testing for Ubuntu1604
+    
+    Idempotency fails on apt cache update same as Debian8
+
 commit df9480881f5454782414ab3e46eef26baad06e8c
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Jul 17 00:53:56 2020 -0400
