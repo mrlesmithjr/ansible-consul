@@ -9,6 +9,9 @@
     name:
       - dnsutils
       - jq
+      - python3-pip
+      - python3-requests
+      - python3-setuptools
       - tree
       - unzip
       - uuid-runtime

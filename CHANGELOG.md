@@ -1,3 +1,9 @@
+commit d40831955c93ff2116f251f410d4ff0eceb3fe54
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 00:16:32 2020 -0400
+
+    Fixing CentOS7 Python Packages
+
 commit 9a63a367c807538d3382ad5acb8ecd5384725560
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 23:56:14 2020 -0400

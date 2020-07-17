@@ -13,6 +13,9 @@
     name:
       - python3-devel
       - python3-pip
+      - python3-pip
+      - python3-requests
+      - python3-setuptools
     state: present
   become: true
   register: result
