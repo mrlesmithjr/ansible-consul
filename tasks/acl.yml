@@ -2,6 +2,20 @@
 - name: acl | install required Python modules via package manager
   package:
     name:
+      - python-requests
+      - python-pip
+      - python-setuptools
+    state: present
+  become: true
+  register: result
+  until: result is successful
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version is version('7', '=')
+
+- name: acl | install required Python modules via package manager
+  package:
+    name:
       - python3-requests
       - python3-pip
       - python3-setuptools
@@ -9,6 +23,9 @@
   become: true
   register: result
   until: result is successful
+  when:
+    - ansible_distribution != "CentOS"
+    - ansible_distribution_major_version is version('7', '=')
 
 - name: acl | install required Python modules via PIP
   pip:

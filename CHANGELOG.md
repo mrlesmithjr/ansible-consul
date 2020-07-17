@@ -1,3 +1,9 @@
+commit 9a63a367c807538d3382ad5acb8ecd5384725560
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:56:14 2020 -0400
+
+    Fixed Python packages for RedHat
+
 commit 62a862dceffe8cb633de5be7a1bef1ef8c271d33
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 23:33:51 2020 -0400
