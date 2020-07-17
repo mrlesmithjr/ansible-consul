@@ -28,6 +28,4 @@ jobs:
           pip install molecule docker
       - name: Test with molecule
         run: |
-          molecule test
-        env:
-          MOLECULE_DISTRO: ${{ matrix.molecule_distro }}
+          molecule test --scenario-name ${{ matrix.molecule_distro }}
