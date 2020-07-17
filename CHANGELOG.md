@@ -1,3 +1,11 @@
+commit 067f75426c83b08ed419700af90155eae3a8c9a5
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 19:55:35 2020 -0400
+
+    Fixed issue with consul_acl loop
+    
+    New loop|subelements causing issues with previous definitions
+
 commit 9e41616c432e9b2b8b59c6539a2a463e6de50269
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:40:41 2020 -0400
