@@ -11,6 +11,22 @@
 - name: redhat | installing dependencies
   yum:
     name:
+      - python-devel
+      - python-pip
+      - python-pip
+      - python-requests
+      - python-setuptools
+    state: present
+  become: true
+  register: result
+  until: result is successful
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version is version('7', '=')
+
+- name: redhat | installing dependencies
+  yum:
+    name:
       - python3-devel
       - python3-pip
       - python3-pip

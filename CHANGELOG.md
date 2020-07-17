@@ -1,3 +1,17 @@
+commit 0caf2e678e46029baf2f145f20b3afbd482b811b
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 00:53:56 2020 -0400
+
+    Trying to fix CentOS7 Python Packages
+
+commit 954daa7270ba2a2abb52ffe075f7bd129bf80c09
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 00:29:54 2020 -0400
+
+    Changing package pre-reqs to simplify
+    
+    Will troubleshoot after failures
+
 commit d40831955c93ff2116f251f410d4ff0eceb3fe54
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Jul 17 00:16:32 2020 -0400
