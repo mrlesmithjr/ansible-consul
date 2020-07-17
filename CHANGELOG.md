@@ -1,3 +1,17 @@
+commit 9c27eafdde0d5fb673e9c512c7d374afa28ad51f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 09:16:28 2020 -0400
+
+    Added Apt cache_valid_time back
+
+commit 7031c395ff623a8e2246ebe6fd5162143c66ca54
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Jul 17 02:08:47 2020 -0400
+
+    Added bootstrap-python role as requirement
+    
+    This should solve Python requirements issues
+
 commit 22a2f9357febeadcff2c70800dffb38e670d3436
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Jul 17 02:08:08 2020 -0400
