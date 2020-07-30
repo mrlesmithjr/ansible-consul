@@ -51,4 +51,5 @@
   file:
     path: "{{ consul_bin_path + '/consul_backup' }}"
     state: absent
+  become: true
   when: consul_download_extract is successful
