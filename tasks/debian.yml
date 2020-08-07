@@ -8,6 +8,7 @@
 - name: debian | installing dependencies
   apt:
     name:
+      - cron
       - dnsutils
       - jq
       - python3-pip
