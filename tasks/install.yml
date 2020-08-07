@@ -14,6 +14,14 @@
     - consul_upgrade|bool
     - consul_binary_exists.stat.exists
 
+- name: install | Taking Consul Snapshot Prior to Upgrade
+  command: "{{ consul_bin_path }}/consul snapshot save {{ consul_backups.backup_dir }}/consul_backup.snap"
+  become: true
+  when:
+    - consul_upgrade|bool
+    - consul_binary_exists.stat.exists
+    - consul_version_installed.stdout < consul_version
+
 - name: install | backup current binary as fallback # noqa 305
   shell: "mv {{ consul_bin_path + '/consul' }} {{ consul_bin_path + '/consul_backup' }}"
   register: consul_binary_backup

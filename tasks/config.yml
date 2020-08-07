@@ -36,3 +36,16 @@
   become: true
   notify:
     - restart consul
+
+- name: config | Configuring Consul Backups
+  cron:
+    cron_file: consul_backups
+    hour: "{{ consul_backups.schedule.hour }}"
+    job: "{{ consul_bin_path }}/consul snapshot save {{ consul_backups.backup_dir }}/consul_backup.snap"
+    minute: "{{ consul_backups.schedule.minute }}"
+    name: Consul Backups
+    state: present
+    user: root
+    weekday: "{{ consul_backups.schedule.weekday }}"
+  become: true
+  when: consul_backups.enabled|bool

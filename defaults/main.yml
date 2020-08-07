@@ -37,6 +37,15 @@ consul_configuration:
   telemetry: {}
   ui: false
 
+# Enables Consul backup/snapshots
+consul_backups:
+  backup_dir: /var/backups
+  schedule:
+    hour: "*"
+    minute: 0
+    weekday: "*"
+  enabled: true
+
 consul_bin_path: /usr/local/bin
 
 # Define interface to bind to...(eth0|eth1|enp0s8)
