@@ -1,11 +1,12 @@
 ---
 # We create the required consul configuration folders
 - name: config | creating consul configuration folders
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     owner: root
     group: root
     state: directory
+    mode: u=rw,g=r,o=r
   become: true
   loop:
     - "{{ consul_config_dir }}"
@@ -14,7 +15,7 @@
 
 # We create the consul data folder
 - name: config | creating consul data folder
-  file:
+  ansible.builtin.file:
     path: "{{ consul_configuration.data_dir }}"
     owner: "{{ consul_user_info.user }}"
     group: "{{ consul_user_info.group }}"
@@ -22,10 +23,11 @@
     state: directory
   become: true
 
-- import_tasks: cluster.yml
+- name: Manage Consul cluster
+  ansible.builtin.import_tasks: cluster.yml
 
 - name: config | configuring consul
-  template:
+  ansible.builtin.template:
     src: etc/consul.d/config.json.j2
     dest: "{{ consul_config_dir + '/config.json' }}"
     owner: root
@@ -38,7 +40,7 @@
     - restart consul
 
 - name: config | Configuring Consul Backups
-  cron:
+  ansible.builtin.cron:
     cron_file: consul_backups
     hour: "{{ consul_backups.schedule.hour }}"
     job: "{{ consul_bin_path }}/consul snapshot save {{ consul_backups.backup_dir }}/consul_backup.snap"

@@ -29,7 +29,7 @@ consul_configuration:
   retry_join: |
     {% set servers = [] %}
     {% for server in groups[consul_servers_group] %}
-    {%   set _ = servers.append(hostvars[server]['ansible_'+consul_bind_interface]['ipv4']['address']) %}
+    {%   set _ = servers.append(hostvars[server]['ansible_' + consul_bind_interface]['ipv4']['address']) %}
     {% endfor %}
     {{ servers }}
   retry_join_wan: []

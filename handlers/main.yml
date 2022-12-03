@@ -1,37 +1,37 @@
 ---
 # handlers file for ansible-consul
 - name: reload systemd
-  systemd:
+  ansible.builtin.systemd:
     name: consul
     daemon_reload: yes
   become: true
 
 - name: reload consul
-  service:
+  ansible.builtin.service:
     name: consul
     state: reloaded
   become: true
 
 - name: restart consul
-  service:
+  ansible.builtin.service:
     name: consul
     state: restarted
   become: true
 
 - name: start consul
-  service:
+  ansible.builtin.service:
     name: consul
     state: started
   become: true
 
 - name: stop consul
-  service:
+  ansible.builtin.service:
     name: consul
     state: stopped
   become: true
 
 - name: restart dnsmasq
-  service:
+  ansible.builtin.service:
     name: dnsmasq
     state: restarted
   become: true

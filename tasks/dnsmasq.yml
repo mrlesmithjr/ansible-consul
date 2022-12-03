@@ -1,6 +1,6 @@
 ---
 - name: dnsmasq | installing dnsmasq
-  package:
+  ansible.builtin.package:
     name: dnsmasq
     state: present
   become: true
@@ -8,13 +8,13 @@
   until: result is successful
 
 - name: dnsmasq | ensuring dnsmasq service is enabled
-  service:
+  ansible.builtin.service:
     name: dnsmasq
     enabled: true
   become: true
 
 - name: dnsmasq | configuring dnsmasq to resolv consul dns
-  template:
+  ansible.builtin.template:
     src: etc/dnsmasq.d/10-consul.j2
     dest: /etc/dnsmasq.d/10-consul
     owner: root

@@ -1,13 +1,13 @@
 ---
 - name: install | check if consul binary is installed
-  stat:
+  ansible.builtin.stat:
     path: "{{ consul_bin_path + '/consul' }}"
   register: consul_binary_exists
   ignore_errors: true
   become: true
 
-- name: install | try to determine current consul version # noqa 306
-  shell: "{{ consul_bin_path + '/consul version' }} | head -1 | cut -d 'v' -f2"
+- name: install | try to determine current consul version
+  ansible.builtin.shell: "set -o pipefail && {{ consul_bin_path + '/consul version' }} | head -1 | cut -d 'v' -f2"
   register: consul_version_installed
   changed_when: false
   when:
@@ -15,15 +15,15 @@
     - consul_binary_exists.stat.exists
 
 - name: install | Taking Consul Snapshot Prior to Upgrade
-  command: "{{ consul_bin_path }}/consul snapshot save {{ consul_backups.backup_dir }}/consul_backup.snap"
+  ansible.builtin.command: "{{ consul_bin_path }}/consul snapshot save {{ consul_backups.backup_dir }}/consul_backup.snap"
   become: true
   when:
     - consul_upgrade|bool
     - consul_binary_exists.stat.exists
     - consul_version_installed.stdout < consul_version
 
-- name: install | backup current binary as fallback # noqa 305
-  shell: "mv {{ consul_bin_path + '/consul' }} {{ consul_bin_path + '/consul_backup' }}"
+- name: install | backup current binary as fallback # noqa command-instead-of-shell
+  ansible.builtin.shell: "mv {{ consul_bin_path + '/consul' }} {{ consul_bin_path + '/consul_backup' }}"
   register: consul_binary_backup
   become: true
   when:
@@ -32,21 +32,21 @@
     - consul_version_installed.stdout < consul_version
 
 - name: install | Installing HashiCorp Consul
-  unarchive:
+  ansible.builtin.unarchive:
     creates: "{{ consul_bin_path + '/consul' }}"
-    dest: "{{ consul_bin_path+'/' }}"
+    dest: "{{ consul_bin_path + '/' }}"
     group: "{{ consul_user_info.group }}"
     mode: u=rwx,g=rx,o=rx
     owner: "{{ consul_user_info.user }}"
     remote_src: true
-    src: "{{ 'https://releases.hashicorp.com/consul/'+consul_version|string+'/consul_'+consul_version|string+'_linux_amd64.zip' }}"
+    src: "{{ 'https://releases.hashicorp.com/consul/' + consul_version | string + '/consul_' + consul_version | string + '_linux_amd64.zip' }}"
   become: true
   register: consul_download_extract
   notify:
     - restart consul
 
-- name: install | restoring former binary as upgrade failed # noqa 305
-  shell: "mv {{ consul_bin_path + '/consul_backup' }} {{ consul_bin_path + '/consul' }}"
+- name: install | restoring former binary as upgrade failed # noqa command-instead-of-shell
+  ansible.builtin.shell: "mv {{ consul_bin_path + '/consul_backup' }} {{ consul_bin_path + '/consul' }}"
   become: true
   register: consul_binary_restore
   notify:
@@ -56,7 +56,7 @@
     - consul_binary_backup is successful
 
 - name: install | remove not required binary backup
-  file:
+  ansible.builtin.file:
     path: "{{ consul_bin_path + '/consul_backup' }}"
     state: absent
   become: true
