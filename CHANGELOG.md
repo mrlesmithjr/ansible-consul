@@ -9,7 +9,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Jul 17 02:08:47 2020 -0400
 
     Added bootstrap-python role as requirement
-    
+
     This should solve Python requirements issues
 
 commit 22a2f9357febeadcff2c70800dffb38e670d3436
@@ -17,7 +17,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Jul 17 02:08:08 2020 -0400
 
     removed unused requirements
-    
+
     This is used from repo root so these are not needed
 
 commit b001d632ec240680bd76b38074894af9ca2a4bd0
@@ -31,7 +31,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Jul 17 01:18:17 2020 -0400
 
     Disabled CI testing for Ubuntu1604
-    
+
     Idempotency fails on apt cache update same as Debian8
 
 commit df9480881f5454782414ab3e46eef26baad06e8c
@@ -45,7 +45,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Jul 17 00:29:54 2020 -0400
 
     Changing package pre-reqs to simplify
-    
+
     Will troubleshoot after failures
 
 commit d40831955c93ff2116f251f410d4ff0eceb3fe54
@@ -107,7 +107,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 21:42:46 2020 -0400
 
     Fixed Python package installs
-    
+
     Need to ensure we are installing Python3 packages and setuptools
 
 commit c61b509e45fe1978eb458d8dbf616a58841e7833
@@ -115,7 +115,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 20:32:12 2020 -0400
 
     Removed client services functionality
-    
+
     This functionality will be moving to https://github.com/mrlesmithjr/ansible-consul-client
 
 commit 2d3c27ba3129c391c56ed83b2d255a510619fde3
@@ -129,7 +129,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:55:35 2020 -0400
 
     Fixed issue with consul_acl loop
-    
+
     New loop|subelements causing issues with previous definitions
 
 commit 9e41616c432e9b2b8b59c6539a2a463e6de50269
@@ -137,7 +137,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:40:41 2020 -0400
 
     Cleaned up loops
-    
+
     - Changed with_items to loop
     - Changed with_subelements to loop
 
@@ -152,7 +152,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:31:15 2020 -0400
 
     Removed tags
-    
+
     Need to minimize the usage of tags until absolutely needed
 
 commit 016a4af848f09478436daf495709f78b6f5f9b83
@@ -172,7 +172,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:28:50 2020 -0400
 
     Cleaned up package installs
-    
+
     - Consolidated where applicable
     - Cleaned up formatting where applicable
 
@@ -187,7 +187,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:27:26 2020 -0400
 
     Cleaned up when conditions
-    
+
     The previous conditions needed to be cleaned up badly.
     We need to ensure our conditionals are as simple as possible.
 
@@ -196,7 +196,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:10:02 2020 -0400
 
     Updated Python requirements
-    
+
     Updated Python requirements for testing, etc. including Molecule
 
 commit 8d450cee7714d25c2156fb3912a2d28fcaa70369
@@ -204,7 +204,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 19:09:00 2020 -0400
 
     First major variable refactoring
-    
+
     Switching to a consolidated configuration option which is converted to JSON
     This brings the configuration of Consul in sync with our other Hashi roles
 
@@ -213,7 +213,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 14:42:34 2020 -0400
 
     Added Apt cache update for Debian
-    
+
     Need to ensure that all package info is up to date
 
 commit bb7d905c894b6c76218be14c4f9904745e9e2b3f
@@ -263,7 +263,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Tue Apr 7 15:51:04 2020 -0400
 
     Updated files, etc. after new structure
-    
+
     This aligns to cookiecutter template
 
 commit eb63bddc88f42c4499f59019f93fbe537b206366
@@ -271,7 +271,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Tue Apr 7 15:46:37 2020 -0400
 
     Deleted old tests, etc. not needed
-    
+
     These files are no longer required for new format
 
 commit f082995a05e669223f67e2c6280a4d1e1b8411c5
@@ -285,7 +285,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Dec 27 21:34:14 2018 -0500
 
     First commit of refactoring
-    
+
     Cleaned up code based on Ansible lint and YAML lint
     Implemented updated Travis CI testing
 
@@ -324,7 +324,7 @@ Author: jardleex <jardleex@users.noreply.github.com>
 Date:   Mon Nov 6 16:43:12 2017 +0100
 
     added optional deployment of a pre-populates peers.json for outage recovery
-    
+
     added missing peers.json_prepared.j2
 
 commit 9c403def63d852279a740141c25481db41b83311
@@ -578,7 +578,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Tue May 16 10:42:33 2017 -0400
 
     Added become: true for generating key... Addresses issue #33
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit be3baa8f07d9f3b63731a603eed37eeb9da7444b
@@ -700,7 +700,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Mon May 1 16:26:22 2017 -0400
 
     Updated roles
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit af17a65777de18f139b4c441252aebd72040e949
@@ -708,7 +708,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Mon May 1 11:40:12 2017 -0400
 
     Added conditional for checking if host is in play_hosts
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 9cb6a90f45c997d234c57337ee243f166cfd23d0
@@ -716,7 +716,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Apr 28 08:26:29 2017 -0400
 
     Fixes applied to address issue #14
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit c8b892cc6c7393657c05c774f1d985af0a46ecd4
@@ -724,7 +724,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sun Apr 23 15:05:49 2017 -0400
 
     Split out cluster related tasks based on consul_cluster var
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit e327a31970e107a640fcadddfffd777bdcb76749
@@ -732,7 +732,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sun Apr 23 12:38:49 2017 -0400
 
     Split out tasks into separate task files
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 8142d109f65301e69b36ff6cc39b688349006be5
@@ -740,7 +740,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sun Apr 23 11:28:23 2017 -0400
 
     Setting Travis to spin up with sudo required
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit dbba55dc7ebb6064c98878f71c100cd26a1eb514
@@ -748,7 +748,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sun Apr 23 11:25:28 2017 -0400
 
     Added become true where needed
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit a7d530963e0710e2208cc320c22be918511c7e46
@@ -756,7 +756,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sun Apr 23 10:28:36 2017 -0400
 
     Adding become where necessary
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 255d51dd9b90b7c0c34c9454e16368b018b17e47
@@ -764,7 +764,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sun Apr 23 10:29:46 2017 -0400
 
     Updated repo info
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 77c9199720c41c5ad2e41849c0db1a30f87a5e2c
@@ -772,7 +772,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sun Apr 23 10:18:14 2017 -0400
 
     Changed service definition templating
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit ff88e93ae88ec97818d92634dbe662043bf8ec23
@@ -780,7 +780,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sat Apr 22 23:58:07 2017 -0400
 
     Fixed check mode run
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 2999bec60f1cebe5203996883fca45fc230f95e5
@@ -788,7 +788,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Sat Apr 22 23:46:25 2017 -0400
 
     Added initial ACL setup, changed process of configuring config.json template
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 03eca6b5b147dbbbff0e6086c145aa671473dacb
@@ -796,7 +796,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 20 22:53:40 2017 -0400
 
     Removed hosts file which was in wrong place
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 5c24c0df7ce94a5f82a836e81a5cc95dff93a46b
@@ -804,7 +804,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 20 22:48:49 2017 -0400
 
     Updated Vagrant info and changed redis check script
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 87aa5059b89699f85fcbd3099a61392b8806e25b
@@ -812,7 +812,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 20 22:24:38 2017 -0400
 
     Updated Vagrant environment for testing
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 242966c7e1b7892fb7b7fbf7813d5aa0b728de08
@@ -820,7 +820,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 20 22:21:18 2017 -0400
 
     Fixed template issue
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit e8aad6b497f094a00b1ceef98e725a3574fd361a
@@ -828,7 +828,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 20 20:20:17 2017 -0400
 
     Cleaned up code and upgrade Consul version
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 6d08948901751bc2eb4fbe3670f9e00b645610c0
@@ -836,29 +836,29 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 20 19:47:42 2017 -0400
 
     Added Travis testing (#4)
-    
+
     * Added Travis testing
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
-    
+
     * Added check mode conditional
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
-    
+
     * Added consul inventory groups
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
-    
+
     * Added some vars and checks to correctly run through check mode
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
-    
+
     * Added check mode conditional
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
-    
+
     * Fixed with_items and added additional conditional for check mode on app services
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 24a296b9667a39248aa2ec702a59f0768b435f82
@@ -866,7 +866,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jan 5 16:30:55 2017 -0500
 
     Fixed bootstrap_expect issue with cluster
-    
+
     When provisioning out a cluster with more than one manager the cluster goes into a strange state making the cluster unreliable. Removing the division of 2 fixes this issue.
 
 commit 400ae04f10e7b08ca9320acdb6e50fb1b0b054c7
@@ -874,7 +874,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Wed Dec 7 22:18:37 2016 -0500
 
     Addresses issue #2
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 39ddcb79b19c32c4c9951a452c5bb6d2d6d02a8b
@@ -882,7 +882,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Wed Dec 7 22:15:12 2016 -0500
 
     Addresses issue #1
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit ac691997f947be6498a3419f335a02121a940e90
@@ -890,7 +890,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Wed Dec 7 22:12:34 2016 -0500
 
     Fixed Vagrant environment
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 14422755abe37765bf0b0d10083706bd0496d8d5
@@ -898,7 +898,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Oct 27 21:21:36 2016 -0400
 
     Updated to fix Vagrant issues
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.com>
 
 commit 954d86cb98eefdd4b90991104e02fcc8d8382bc3
@@ -906,7 +906,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.coml>
 Date:   Sat Mar 5 00:13:20 2016 -0500
 
     Changed back to Trusty
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.coml>
 
 commit 14c6b4dc3d53680ea39c6c90672b22b6479b0fef
@@ -914,7 +914,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.coml>
 Date:   Fri Mar 4 23:54:23 2016 -0500
 
     Added Fedora 23 support
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.coml>
 
 commit 0e9b3e1ffe856f4ddf31c8850bbb7cbc6e2eee96
@@ -922,7 +922,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.coml>
 Date:   Fri Mar 4 22:44:07 2016 -0500
 
     Added RHEL 7 support
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.coml>
 
 commit 9ca2b31b13a9c121bb08954a8f166969f8d5d373
@@ -930,7 +930,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.coml>
 Date:   Fri Mar 4 21:56:32 2016 -0500
 
     Added DNSMasq support for DNS resolv of consul
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.coml>
 
 commit 78d6545656331089f096e79ae1dd81b981d68a94
@@ -938,7 +938,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.coml>
 Date:   Fri Mar 4 21:39:12 2016 -0500
 
     Added Debian Jessie support
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.coml>
 
 commit e4354b4b9e5bf69c712153eccd6e22276f96b1ec
@@ -946,7 +946,7 @@ Author: Larry Smith Jr <mrlesmithjr@gmail.coml>
 Date:   Fri Mar 4 20:48:35 2016 -0500
 
     Updated and working for Ubuntu Trusty
-    
+
     Signed-off-by: Larry Smith Jr <mrlesmithjr@gmail.coml>
 
 commit 11c75fc637dd15f5f9a1cc911b24f84badbfec22
