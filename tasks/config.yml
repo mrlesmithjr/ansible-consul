@@ -3,8 +3,8 @@
 - name: config | creating consul configuration folders
   ansible.builtin.file:
     path: "{{ item }}"
-    owner: root
-    group: root
+    owner: "{{ consul_user_info.user }}"
+    group: "{{ consul_user_info.group }}"
     state: directory
     mode: u=rw,g=r,o=r
   become: true
@@ -30,8 +30,8 @@
   ansible.builtin.template:
     src: etc/consul.d/config.json.j2
     dest: "{{ consul_config_dir + '/config.json' }}"
-    owner: root
-    group: root
+    owner: "{{ consul_user_info.user }}"
+    group: "{{ consul_user_info.group }}"
     mode: u=rw,g=r,o=r
   register: consul_reconfigured
   no_log: true

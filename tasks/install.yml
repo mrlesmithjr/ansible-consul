@@ -39,7 +39,7 @@
     mode: u=rwx,g=rx,o=rx
     owner: "{{ consul_user_info.user }}"
     remote_src: true
-    src: "{{ 'https://releases.hashicorp.com/consul/' + consul_version | string + '/consul_' + consul_version | string + '_linux_amd64.zip' }}"
+    src: "{{ 'https://releases.hashicorp.com/consul/' + consul_version | string + '/consul_' + consul_version | string + '_linux_' + consul_architecture + '.zip' }}"
   become: true
   register: consul_download_extract
   notify:

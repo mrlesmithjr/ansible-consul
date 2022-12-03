@@ -16,7 +16,7 @@
     dest: /etc/systemd/system/consul.service
     owner: root
     group: root
-    mode: 0644
+    mode: u=rw,g=r,o=r
   become: true
   notify:
     - reload systemd
