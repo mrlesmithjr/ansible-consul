@@ -21,6 +21,8 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns_mode: host
+    groups:
+      - consul_servers
 provisioner:
   name: ansible
   playbooks:
