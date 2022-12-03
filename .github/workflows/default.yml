@@ -18,8 +18,8 @@ jobs:
       max-parallel: 4
       matrix:
         molecule_distro:
-          - alpine313
-          - alpine314
+          # - alpine313
+          # - alpine314
           - centos7
           - centos8
           # - debian8
@@ -33,6 +33,7 @@ jobs:
           # - ubuntu1604
           - ubuntu1804
           - ubuntu2004
+          - ubuntu2204
         python-version: [3.9]
 
     steps:
