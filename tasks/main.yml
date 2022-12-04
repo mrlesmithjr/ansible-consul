@@ -1,26 +1,34 @@
 ---
 # tasks file for ansible-consul
 
-- import_tasks: debian.yml
+- name: Apply Debian tasks
+  ansible.builtin.import_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- import_tasks: redhat.yml
+- name: Apply RHEL tasks
+  ansible.builtin.import_tasks: redhat.yml
   when: ansible_os_family == "RedHat"
 
-- import_tasks: accounts.yml
+- name: Manage accounts
+  ansible.builtin.import_tasks: accounts.yml
 
-- import_tasks: install.yml
+- name: Install Consul
+  ansible.builtin.import_tasks: install.yml
 
-- import_tasks: config.yml
+- name: Configure Consul
+  ansible.builtin.import_tasks: config.yml
 
-- import_tasks: services.yml
+- name: Manage Consul services
+  ansible.builtin.import_tasks: services.yml
 
-- import_tasks: acl.yml
+- name: Manage Consul ACLs
+  ansible.builtin.import_tasks: acl.yml
   when:
     - consul_acl is defined
     - consul_configuration.datacenter == consul_configuration.primary_datacenter
 
-- import_tasks: dnsmasq.yml
+- name: Install DNSMasq
+  ansible.builtin.import_tasks: dnsmasq.yml
   when:
     - consul_enable_dnsmasq is defined
     - consul_enable_dnsmasq|bool

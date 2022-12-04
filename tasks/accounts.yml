@@ -1,14 +1,14 @@
 ---
 # We create the consul group
 - name: accounts | creating consul group
-  group:
+  ansible.builtin.group:
     name: "{{ consul_user_info.group }}"
     state: present
   become: true
 
 # We create the consul user and add it to the consul group
 - name: accounts | creating consul user
-  user:
+  ansible.builtin.user:
     createhome: false
     group: "{{ consul_user_info.group }}"
     name: "{{ consul_user_info.user }}"
