@@ -6,7 +6,7 @@
     owner: "{{ consul_user_info.user }}"
     group: "{{ consul_user_info.group }}"
     state: directory
-    mode: u=rw,g=r,o=r
+    mode: u=rwx,g=rx,o=rx
   become: true
   loop:
     - "{{ consul_config_dir }}"
