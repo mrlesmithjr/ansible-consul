@@ -14,7 +14,7 @@
     - consul_upgrade|bool
     - consul_binary_exists.stat.exists
 
-- name: install | Taking Consul Snapshot Prior to Upgrade
+- name: install | Taking Consul Snapshot Prior to Upgrade # noqa no-changed-when
   ansible.builtin.command: "{{ consul_bin_path }}/consul snapshot save {{ consul_backups.backup_dir }}/consul_backup.snap"
   become: true
   when:
@@ -22,7 +22,7 @@
     - consul_binary_exists.stat.exists
     - consul_version_installed.stdout < consul_version
 
-- name: install | backup current binary as fallback # noqa command-instead-of-shell
+- name: install | backup current binary as fallback # noqa command-instead-of-shell no-changed-when
   ansible.builtin.shell: "mv {{ consul_bin_path + '/consul' }} {{ consul_bin_path + '/consul_backup' }}"
   register: consul_binary_backup
   become: true
@@ -45,7 +45,7 @@
   notify:
     - restart consul
 
-- name: install | restoring former binary as upgrade failed # noqa command-instead-of-shell
+- name: install | restoring former binary as upgrade failed # noqa command-instead-of-shell no-changed-when
   ansible.builtin.shell: "mv {{ consul_bin_path + '/consul_backup' }} {{ consul_bin_path + '/consul' }}"
   become: true
   register: consul_binary_restore
